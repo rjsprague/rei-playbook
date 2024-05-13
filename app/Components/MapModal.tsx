@@ -30,6 +30,10 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
     const [phoneError, setPhoneError] = useState('')
     const [nameError, setNameError] = useState('');
     const [submitting, setSubmitting] = useState(false);
+    const [motivation, setMotivation] = useState('');
+    const [ownership, setOwnership] = useState('');
+    const [timeframe, setTimeframe] = useState('');
+
     const router = useRouter();
 
     const [termsChecked, setTermsChecked] = useState(false);
@@ -51,6 +55,21 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
     };
 
     const confirmAddress = () => {
+        setViewState('timeframe');
+    };
+
+    const confirmTimeframe = (timeframe: string) => {
+        setTimeframe(timeframe);
+        setViewState('ownership');
+    };
+
+    const confirmOwnership = (ownership: string) => {
+        setOwnership(ownership);
+        setViewState('motivation');
+    };
+
+    const confirmMotivation = (motivation: string) => {
+        setMotivation(motivation);
         setViewState('form')
     }
 
@@ -174,7 +193,6 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
 
             // Close the modal and redirect to the thank you page
             closeModal()
-            // router.push('/Thank-You')
             window.location.href = '/Thank-You';
 
         } else {
@@ -214,153 +232,263 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                     {viewState === 'map' ? 'Confirm Address' : 'Enter Your Details'}
                                 </Dialog.Title>
                                 <hr className='mb-4' />
-                                <div className="mt-2">
-                                    {viewState === 'map' ? (
-                                        <GoogleMap
-                                            mapContainerStyle={mapContainerStyle}
-                                            zoom={15}
-                                            center={addressLatLng}
+
+                                {viewState === 'map' ? (
+                                    <GoogleMap
+                                        mapContainerStyle={mapContainerStyle}
+                                        zoom={15}
+                                        center={addressLatLng}
+                                    >
+                                        <Marker position={addressLatLng} />
+                                    </GoogleMap>
+                                ) : viewState === 'timeframe' ? (
+                                    <div className="flex flex-col gap-4">
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmTimeframe('As soon as possible')}
                                         >
-                                            <Marker position={addressLatLng} />
-                                        </GoogleMap>
-                                    ) : (
-                                        // Form for user details
-                                        <form id='form_contact-form' className="flex flex-col gap-4">
-                                            <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
-                                                <FiUser className="text-lg text-gray-700 mr-2" />
-                                                <input
-                                                    aria-label='name'
-                                                    name="name"
-                                                    value={name}
-                                                    onChange={(e) => setName(e.target.value)}
-                                                    className="flex-1 bg-transparent"
-                                                    type="text"
-                                                    placeholder="Name"
-                                                    required
-                                                />
+                                            As soon as possible
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmTimeframe('Within 30 days')}
+                                        >
+                                            Within 30 days
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmTimeframe('Within 3 months')}
+                                        >
+                                            Within 3 months
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmTimeframe('Not urgent')}
+                                        >
+                                            Not urgent
+                                        </button>
+                                    </div>
+                                ) : viewState === 'ownership' ? (
+                                    <div className="flex flex-col gap-4">
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmOwnership('Yes, I am the owner.')}
+                                        >
+                                            Yes, I am the owner.
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmOwnership('No, someone else is the owner.')}
+                                        >
+                                            No, someone else is the owner.
+                                        </button>
+                                    </div>
+                                ) : viewState === 'motivation' ? (
+                                    <div className="flex flex-col gap-4">
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmMotivation('Needs repairs')}
+                                        >
+                                            Needs repairs
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmMotivation('Change in income')}
+                                        >
+                                            Change in income
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmMotivation('Relocation')}
+                                        >
+                                            Relocation
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmMotivation('Divorce')}
+                                        >
+                                            Divorce
+                                        </button>
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            onClick={() => confirmMotivation('Other')}
+                                        >
+                                            Other
+                                        </button>
+                                    </div>
+                                ) : viewState === 'form' ? (
+                                    // Form for user details
+                                    <form id='form_contact-form' className="flex flex-col gap-4">
+                                        <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
+                                            <FiUser className="text-lg text-gray-700 mr-2" />
+                                            <input
+                                                aria-label='name'
+                                                name="name"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                className="flex-1 bg-transparent"
+                                                type="text"
+                                                placeholder="Name"
+                                                required
+                                            />
 
-                                            </div>
+                                        </div>
 
-                                            <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
-                                                <FiMail className="text-lg text-gray-700 mr-2" />
-                                                <input
-                                                    aria-label='email'
-                                                    name="email"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    className="flex-1 bg-transparent"
-                                                    type="email"
-                                                    placeholder="Email"
-                                                    required
-                                                />
-                                                {<p className='text-red-500'>{emailError}</p>}
-                                            </div>
+                                        <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
+                                            <FiMail className="text-lg text-gray-700 mr-2" />
+                                            <input
+                                                aria-label='email'
+                                                name="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                className="flex-1 bg-transparent"
+                                                type="email"
+                                                placeholder="Email"
+                                                required
+                                            />
+                                            {<p className='text-red-500'>{emailError}</p>}
+                                        </div>
 
-                                            <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
-                                                <FiPhone className="text-lg text-gray-700 mr-2" />
-                                                <input
-                                                    aria-label='phone'
-                                                    name="phone"
-                                                    value={phone}
-                                                    onChange={(e) => setPhone(e.target.value)}
-                                                    className="flex-1 bg-transparent"
-                                                    type="tel"
-                                                    placeholder="Phone Number"
-                                                    required
-                                                />
-                                                {<p className='text-red-500'>{phoneError}</p>}
-                                            </div>
+                                        <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
+                                            <FiPhone className="text-lg text-gray-700 mr-2" />
+                                            <input
+                                                aria-label='phone'
+                                                name="phone"
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                className="flex-1 bg-transparent"
+                                                type="tel"
+                                                placeholder="Phone Number"
+                                                required
+                                            />
+                                            {<p className='text-red-500'>{phoneError}</p>}
+                                        </div>
 
-                                            <div className="hidden">
-                                                <input
-                                                    id="address"
-                                                    name="address"
-                                                    value={address}
-                                                    className="hidden"
-                                                    required
-                                                    readOnly
-                                                />
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="address"
+                                                name="address"
+                                                value={address}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <div className="hidden">
-                                                <input
-                                                    id="zipCode"
-                                                    name="zipCode"
-                                                    value={zipCode}
-                                                    className="hidden"
-                                                    required
-                                                    readOnly
-                                                />
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="zipCode"
+                                                name="zipCode"
+                                                value={zipCode}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <div className="hidden">
-                                                <input
-                                                    id="utm_source"
-                                                    name="utm_source"
-                                                    value={utmSource}
-                                                    className="hidden"
-                                                    required
-                                                    readOnly
-                                                />
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="timeframe"
+                                                name="timeframe"
+                                                value={timeframe}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <div className="hidden">
-                                                <input
-                                                    id="utm_campaign"
-                                                    name="utm_campaign"
-                                                    value={utmCampaign}
-                                                    className="hidden"
-                                                    required
-                                                    readOnly
-                                                />
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="ownership"
+                                                name="ownership"
+                                                value={ownership}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <div className="hidden">
-                                                <input
-                                                    id="utm_term"
-                                                    name="utm_term"
-                                                    value={utmTerm}
-                                                    className="hidden"
-                                                    required
-                                                    readOnly
-                                                />
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="motivation"
+                                                name="motivation"
+                                                value={motivation}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
-                                                <input
-                                                    type="checkbox"
-                                                    name="terms"
-                                                    id="terms"
-                                                    checked={termsChecked}
-                                                    onChange={(e) => setTermsChecked(e.target.checked)}
-                                                />
-                                                <label htmlFor="terms" className="ml-2 text-gray-700">I agree to the <Link href="/terms" className="text-primary underline">Terms and Conditions</Link> and the <Link href="/privacy" className="text-primary underline">Privacy Policy</Link></label>
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="utm_source"
+                                                name="utm_source"
+                                                value={utmSource}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
-                                                <input
-                                                    type="checkbox"
-                                                    name="privacy"
-                                                    id="privacy"
-                                                    checked={privacyChecked}
-                                                    onChange={(e) => setPrivacyChecked(e.target.checked)}
-                                                />
-                                                <label htmlFor="privacy" className="ml-2 text-gray-700">I consent to receive SMS and email communications from {businessName} for the purposes of selling my property. I understand that message and data rates may apply. I understand I can opt out of SMS communications by replying with the word &quot;STOP&quot;</label>
-                                            </div>
+                                        <div className="hidden">
+                                            <input
+                                                id="utm_campaign"
+                                                name="utm_campaign"
+                                                value={utmCampaign}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            <button
-                                                className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                                                type="submit"
-                                                disabled={!name || !email || !phone || !address || !termsChecked || !privacyChecked || submitting}
-                                                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSubmit(e)}
+                                        <div className="hidden">
+                                            <input
+                                                id="utm_term"
+                                                name="utm_term"
+                                                value={utmTerm}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
 
-                                            >
-                                                {!name || !email || !phone || !address || !termsChecked || !privacyChecked ? "Form Incomplete" : submitting ? "Submitting" : "Get My Cash Offer"}
-                                            </button>
-                                            {<p className='text-red-500'>{submissionWarning}</p>}
-                                        </form>
-                                    )}
-                                </div>
+                                        <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
+                                            <input
+                                                type="checkbox"
+                                                name="terms"
+                                                id="terms"
+                                                checked={termsChecked}
+                                                onChange={(e) => setTermsChecked(e.target.checked)}
+                                            />
+                                            <label htmlFor="terms" className="ml-2 text-gray-700">I agree to the <Link href="/terms" className="text-primary underline">Terms and Conditions</Link> and the <Link href="/privacy" className="text-primary underline">Privacy Policy</Link></label>
+                                        </div>
+
+                                        <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
+                                            <input
+                                                type="checkbox"
+                                                name="privacy"
+                                                id="privacy"
+                                                checked={privacyChecked}
+                                                onChange={(e) => setPrivacyChecked(e.target.checked)}
+                                            />
+                                            <label htmlFor="privacy" className="ml-2 text-gray-700">I consent to receive SMS and email communications from {businessName} for the purposes of selling my property. I understand that message and data rates may apply. I understand I can opt out of SMS communications by replying with the word &quot;STOP&quot;</label>
+                                        </div>
+
+                                        <button
+                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                                            type="submit"
+                                            disabled={!name || !email || !phone || !address || !termsChecked || !privacyChecked || submitting}
+                                            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSubmit(e)}
+
+                                        >
+                                            {!name || !email || !phone || !address || !termsChecked || !privacyChecked ? "Form Incomplete" : submitting ? "Submitting" : "Get My Cash Offer"}
+                                        </button>
+                                        {<p className='text-red-500'>{submissionWarning}</p>}
+                                    </form>
+                                ) : (
+                                    <div></div>
+                                )}
+
                                 <div className="mt-4 flex justify-around">
                                     {viewState === 'map' ? (
                                         <div className='flex flex-row sm:gap-4 gap-2'>

@@ -207,7 +207,7 @@ const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setAddressLatLn
                     placeholder={invalidAddressWarning ? invalidAddressWarning : "Address of property for sale"}
                 />
 
-                <button onClick={handleOfferClick} type="button" className="flex p-1.5 sm:p-2 font-bold text-lg rounded-lg items-center justify-center text-secondary bg-primary absolute top-1 bottom-1 sm:top-1 sm:bottom-1 right-1 sm:right-1  sm:w-36">Get Offer</button>
+                <button onClick={handleOfferClick} type="button" className="flex p-1.5 sm:p-2 font-bold text-lg rounded-lg items-center justify-center text-white bg-primary absolute top-1 bottom-1 sm:top-1 sm:bottom-1 right-1 sm:right-1  sm:w-36">Get Offer</button>
                 {/* We can use the "status" to decide whether we should display the dropdown or not */}
                 {status === "OK" && <ul className="absolute top-16 bg-white mx-2 shadow-md rounded-md p-2 cursor-pointer">{renderSuggestions()}</ul>}
             </div>
