@@ -101,7 +101,7 @@ export default function Home() {
     return (
         <>
             <main className="flex min-h-screen flex-col items-center justify-center bg-secondary">
-                <section className=" h-screen flex flex-col justify-end items-center px-2 sm:px-10 overflow-hidden w-full relative">
+                <section className=" h-screen flex flex-col justify-end items-center px-2 overflow-hidden w-full relative">
 
                     <div className="fixed top-0 flex justify-center w-screen h-80">
                         <svg width="100%" height="100%" className="absolute top-0 flex justify-center z-50">
@@ -122,9 +122,9 @@ export default function Home() {
                                 </div>
                                 : <div></div>}
                             <div className="flex flex-col z-50">
-                                <h1 className="uppercase text-primary text-3xl sm:text-5xl font-medium leading-9 text-nowrap">{businessName}</h1>
+                                <h1 className="uppercase text-primary text-3xl md:text-4xl lg:text-5xl font-medium leading-9 text-nowrap">{businessName}</h1>
                                 <h2
-                                    className={`${dancingScript.variable} text-xl text-nowrap tracking-[5px]`}
+                                    className={`${dancingScript.variable} text-xl text-nowrap tracking-[5px] md:tracking-[7.5px] lg:tracking-[11px] lg:text-2xl`}
                                     style={{
                                         fontFamily: "var(--font-dancing-script)",
                                         fontWeight: "400",
@@ -138,8 +138,8 @@ export default function Home() {
 
                         </div>
                     </div>
-                    <div className="backdrop-blur-md rounded-md p-4 max-w-[1280px] flex flex-col gap-6 relative sm:mb-20 sm:mt-10">
-                        <h1 className="md:text-5xl text-3xl uppercase md:normal-case font-bold text-center text-primary px-2">
+                    <div className="p-4 max-w-[1280px] flex flex-col gap-6 relative">
+                        <h1 className="md:text-4xl lg:text-5xl text-3xl uppercase md:normal-case font-bold text-center text-primary px-2">
                             Sell your house fast for the best price
                         </h1>
                         <h2 className="relative md:text-2xl text-xl md:normal-case flex font-normal text-center text-primary px-2 text-nowrap whitespace-nowrap flex-wrap justify-center">
