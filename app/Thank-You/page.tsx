@@ -35,7 +35,7 @@ const ThankYouPage: React.FC = () => {
     return (
         <>
             <main className="flex min-h-screen flex-col items-center justify-center overflow-x-hidden">
-                <section className="flex w-full flex-row justify-between py-2 items-center bg-white px-3 sm:px-6 md:px-9 lg:px-16 xl:px-36 h-24">
+                {/* <section className="flex w-full flex-row justify-between py-2 items-center bg-white px-3 sm:px-6 md:px-9 lg:px-16 xl:px-36 h-24">
                     {businessLogo ? <Image src={`${businessLogo}`} alt="logo" loading="lazy" width={150} height={70} /> : <div></div>}
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary text-center text-wrap w-32 sm:w-full">{`${businessName}`}</h1>
                     <Link
@@ -45,8 +45,8 @@ const ThankYouPage: React.FC = () => {
                     >
                         <FiPhoneCall className=" bg-primary text-secondary rounded-lg p-2 -rotate-90 h-12 w-12" />
                     </Link>
-                </section>
-                <section className="w-screen h-[90vh] flex flex-col justify-center items-center px-10 relative">
+                </section> */}
+                <section className="w-screen h-screen flex flex-col justify-center items-center px-10 relative">
                     <div className="backdrop-blur-md rounded-md p-4 max-w-[1280px] flex flex-col gap-4">
                         <h1 className=" md:text-4xl text-xl uppercase md:normal-case font-bold text-center text-white px-2">
                             Thank you! We will be in touch soon.
@@ -54,6 +54,7 @@ const ThankYouPage: React.FC = () => {
                     </div>
                     <Image
                         src={imageSrc}
+                        quality={100}
                         alt="House"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
                         priority

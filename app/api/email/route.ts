@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
     const sendToEmails = process.env.SEND_TO_EMAILS?.split(",") as string[]
     const bodyData = await req.text();
     const leadData = JSON.parse(bodyData);
-    const { businessName, businessEmail, name, phone, email, address, zipCode, addressLatLng: { lat, lng }, utmSource, utmCampaign, utmTerm } = leadData;
+    const { businessName, businessEmail, name, phone, email, address, zipCode, addressLatLng: { lat, lng }, timeframe, ownership, motivation, utmSource, utmCampaign, utmTerm } = leadData;
 
     // Save lead data to the database immediately for persistence
     await saveLeadToDatabase({ businessName, name, phone, email, address, zipCode, lat, lng, utmSource, utmCampaign, utmTerm });
@@ -150,7 +150,12 @@ export async function POST(req: NextRequest) {
         "Phone: " + formattedPhone + "\n" +
         "Email: " + email + "\n" +
         "Address: " + address + "\n" +
-        "Zip Code: " + zipCode + "\n";
+        "Zip Code: " + zipCode + "\n" +
+        "Address Lat-Lng: " + addressLat + ":" + addressLng + "\n" +
+        "Timeframe: " + timeframe + "\n" +
+        "Ownership: " + ownership + "\n" +
+        "Motivation: " + motivation + "\n" +
+        trackingData;
 
     const subject = "New Lead: " + address + " " + zipCode;
 
@@ -160,10 +165,12 @@ export async function POST(req: NextRequest) {
         `Address: ${address}` + "<br>" +
         `Zip Code: ${zipCode}` + "<br>" +
         `Address Lat-Lng: ${addressLat}:${addressLng}` + "<br>" +
+        `Timeframe: ${timeframe}` + "<br>" +
+        `Ownership: ${ownership}` + "<br>" +
+        `Motivation: ${motivation}` + "<br>" +
         trackingData;
 
     try {
-
         // if sendToEmails exists then parse and send notification email to each address in the list
         if (sendToEmails && sendToEmails.length > 0) {
             for (const email of sendToEmails) {

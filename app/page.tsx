@@ -101,13 +101,13 @@ export default function Home() {
     return (
         <>
             <main className="flex min-h-screen flex-col items-center justify-center bg-secondary">
-                <section className=" h-screen flex flex-col justify-end items-center px-2 overflow-hidden w-full relative">
-
-                    <div className="fixed top-0 flex justify-center w-screen h-80">
-                        <svg width="100%" height="100%" className="absolute top-0 flex justify-center z-50">
+                <section className=" h-[90vh] flex flex-col justify-end items-center px-2 overflow-hidden w-full relative -mb-10">
+                    {/* logo */}
+                    <div className="absolute top-0 flex justify-center w-screen h-80">
+                        <svg width="100%" height="100%" className="absolute top-0 flex justify-center">
                             <circle cx="39%" cy="50%" r="150" fill="none" stroke="#9C7945" strokeWidth="1" />
                         </svg>
-                        <div className="flex flex-row items-center h-20 bg-secondary z-50 relative top-30">
+                        <div className="flex flex-row items-center h-20 bg-secondary relative top-30">
                             {logoIcon ?
                                 <div>
                                     <Image
@@ -121,7 +121,7 @@ export default function Home() {
                                     />
                                 </div>
                                 : <div></div>}
-                            <div className="flex flex-col z-50">
+                            <div className="flex flex-col">
                                 <h1 className="uppercase text-primary text-3xl md:text-4xl lg:text-5xl font-medium leading-9 text-nowrap">{businessName}</h1>
                                 <h2
                                     className={`${dancingScript.variable} text-xl text-nowrap tracking-[5px] md:tracking-[7.5px] lg:tracking-[11px] lg:text-2xl`}
@@ -135,10 +135,10 @@ export default function Home() {
                                     }}
                                 >Opportunity Delivered</h2>
                             </div>
-
                         </div>
                     </div>
-                    <div className="p-4 max-w-[1280px] flex flex-col gap-6 relative">
+                    {/* form */}
+                    <div className="p-3 max-w-[1280px] flex flex-col gap-4 relative justify-center mb-34 backdrop-blur-sm">
                         <h1 className="md:text-4xl lg:text-5xl text-3xl uppercase md:normal-case font-bold text-center text-primary px-2">
                             Sell your house fast for the best price
                         </h1>
@@ -167,18 +167,15 @@ export default function Home() {
                             We Buy Houses in All 50 States
                         </p>
                     </div>
-
-                    <div className="w-screen flex h-40">
-                        <span style={{
-                            "clipPath": "ellipse(60% 85% at 50% 100%)",
-                            "height": "100%",
-                            "width": "100%",
-                            "background": "#5E6D5A",
-                        }}></span>
-                    </div>
-
                 </section>
-
+                <div className="w-screen flex h-40">
+                    <span style={{
+                        "clipPath": "ellipse(60% 85% at 50% 100%)",
+                        "height": "100%",
+                        "width": "100%",
+                        "background": "#5E6D5A",
+                    }}></span>
+                </div>
                 <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white pb-10">
 
                     <h2 className="text-3xl font-semibold text-center">

@@ -166,6 +166,9 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                 phone,
                 address,
                 zipCode,
+                timeframe,
+                ownership,
+                motivation,
                 utmSource,
                 utmCampaign,
                 utmTerm,
@@ -213,7 +216,7 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-black bg-opacity-50" />
+                    <div className="fixed inset-0 bg-black bg-opacity-30" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 overflow-y-auto">
@@ -228,8 +231,13 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                <Dialog.Title as="h3" className="text-xl text-center mb-4 uppercase font-medium leading-6 text-gray-900">
-                                    {viewState === 'map' ? 'Confirm Address' : 'Enter Your Details'}
+                                <Dialog.Title as="h3" className="text-2xl text-center mb-4 font-medium leading-6 text-gray-900">
+                                    {viewState === 'map' ? 'Is this the correct address?' 
+                                    : viewState === 'timeframe' ? 'How soon are you looking to sell?'
+                                    : viewState === 'ownership' ? 'Do you own the property?'
+                                    : viewState === 'motivation' ? 'Why are you selling?'
+                                    : viewState === 'form' ? 'Enter Your Details'                      
+                                    : 'Hmmmm... Something went wrong.'}
                                 </Dialog.Title>
                                 <hr className='mb-4' />
 
@@ -242,75 +250,75 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                         <Marker position={addressLatLng} />
                                     </GoogleMap>
                                 ) : viewState === 'timeframe' ? (
-                                    <div className="flex flex-col gap-4">
+                                    <div className="flex flex-col gap-4 text-white brightness-100">
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 font-semibold text-xl hover:brightness-125"
                                             onClick={() => confirmTimeframe('As soon as possible')}
                                         >
                                             As soon as possible
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 font-semibold text-xl hover:brightness-125"
                                             onClick={() => confirmTimeframe('Within 30 days')}
                                         >
                                             Within 30 days
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 font-semibold text-xl hover:brightness-125"
                                             onClick={() => confirmTimeframe('Within 3 months')}
                                         >
                                             Within 3 months
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 font-semibold text-xl hover:brightness-125"
                                             onClick={() => confirmTimeframe('Not urgent')}
                                         >
                                             Not urgent
                                         </button>
                                     </div>
                                 ) : viewState === 'ownership' ? (
-                                    <div className="flex flex-col gap-4">
+                                    <div className="flex flex-col gap-4 text-white">
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 font-semibold text-xl hover:brightness-125"
                                             onClick={() => confirmOwnership('Yes, I am the owner.')}
                                         >
                                             Yes, I am the owner.
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 font-semibold text-xl hover:brightness-125"
                                             onClick={() => confirmOwnership('No, someone else is the owner.')}
                                         >
                                             No, someone else is the owner.
                                         </button>
                                     </div>
                                 ) : viewState === 'motivation' ? (
-                                    <div className="flex flex-col gap-4">
+                                    <div className="flex flex-col gap-4 text-white font-semibold text-xl">
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 hover:brightness-125"
                                             onClick={() => confirmMotivation('Needs repairs')}
                                         >
                                             Needs repairs
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 hover:brightness-125"
                                             onClick={() => confirmMotivation('Change in income')}
                                         >
                                             Change in income
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 hover:brightness-125"
                                             onClick={() => confirmMotivation('Relocation')}
                                         >
                                             Relocation
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 hover:brightness-125"
                                             onClick={() => confirmMotivation('Divorce')}
                                         >
                                             Divorce
                                         </button>
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl"
+                                            className="rounded-xl bg-primary py-4 hover:brightness-125"
                                             onClick={() => confirmMotivation('Other')}
                                         >
                                             Other
@@ -471,11 +479,11 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                                 checked={privacyChecked}
                                                 onChange={(e) => setPrivacyChecked(e.target.checked)}
                                             />
-                                            <label htmlFor="privacy" className="ml-2 text-gray-700">I consent to receive SMS and email communications from {businessName} for the purposes of selling my property. I understand that message and data rates may apply. I understand I can opt out of SMS communications by replying with the word &quot;STOP&quot;</label>
+                                            <label htmlFor="privacy" className="ml-2 text-gray-700">Message and data rates may apply.</label>
                                         </div>
 
                                         <button
-                                            className="rounded-xl bg-primary py-4 text-secondary font-semibold text-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="rounded-xl bg-primary py-4 text-white font-semibold text-xl disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-125"
                                             type="submit"
                                             disabled={!name || !email || !phone || !address || !termsChecked || !privacyChecked || submitting}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSubmit(e)}
@@ -495,14 +503,14 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                             <button
                                                 type="button"
                                                 onClick={closeModal}
-                                                className="rounded-xl bg-gray-500 sm:py-4 py-2 px-4 sm:px-8 text-white font-semibold text-md sm:text-xl"
+                                                className="rounded-xl bg-gray-500 sm:py-4 py-2 px-4 sm:px-8 text-white brightness-90 font-semibold text-md sm:text-xl"
                                             >
                                                 Search New Address
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={confirmAddress}
-                                                className="rounded-xl bg-primary sm:py-4 py-2 px-4 sm:px-8 text-secondary font-semibold text-md sm:text-xl"
+                                                className="rounded-xl bg-primary sm:py-4 py-2 px-4 sm:px-8 text-white brightness-125 font-semibold text-md sm:text-xl"
                                             >
                                                 Confirm Address
                                             </button>
