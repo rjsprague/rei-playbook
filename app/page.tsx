@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+import logo from "../public/MovedByMillerLogo.webp";
+import logoIcon from "../public/MovedByMillerLogoIcon.webp";
 import underline from "../public/underline.svg"
 import step1Image from "../public/step1.webp"
 import step2Image from "../public/step2.webp";
@@ -17,6 +19,14 @@ import { useEffect, useState, lazy, Suspense } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { Dancing_Script } from 'next/font/google'
+const dancingScript = Dancing_Script({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-dancing-script'
+})
+
 
 const MapModal = lazy(() => import('./Components/MapModal'));
 const PlacesAutocomplete = lazy(() => import('./Components/PlacesAutocomplete'));
@@ -91,43 +101,44 @@ export default function Home() {
     return (
         <>
             <main className="flex min-h-screen flex-col items-center justify-center bg-secondary">
-                {/* <section className="flex w-full flex-row justify-center py-2 items-center px-3 sm:px-6 md:px-9 lg:px-16 xl:px-36 relative overflow-hidden"> */}
-
-                {/* <h1 className="hidden lg:block text-2xl md:text-4xl lg:text-5xl font-semibold text-primary text-center text-wrap w-32 sm:w-full drop-shadow-lg">{`${businessName}`}</h1> */}
-                {/* <Link
-                        href={`tel:${businessPhone}`}
-                        className="text-4xl font-bold text-center"
-                        aria-label="Call Us"
-                    >
-                        <div className="flex flex-row gap-2 items-center">
-                            {<div className="text-2xl text-nowrap text-primary drop-shadow-md hidden sm:block">{formattedPhone}</div>}
-                            <FiPhoneCall className=" bg-primary text-secondary rounded-lg p-2 -rotate-90 size-12 drop-shadow" />
-                        </div>
-                    </Link> */}
-                {/* </section> */}
-                <section className="absolute top-2 flex justify-start items-start w-2/3 h-80 overflow-hidden">
-                    {businessLogo ? <Image
-                        priority
-                        src={`${businessLogo}`}
-                        alt="logo"
-                        // width={600}
-                        // height={400}
-                        // quality={50}
-                        sizes="(max-width: 320px) 280px, 
-                        (max-width: 480px) 440px, 
-                        (max-width: 768px) 720px, 
-                        (max-width: 1024px) 960px, 
-                        (max-width: 1280px) 1200px,
-                        (max-width: 1536px) 1440px,
-                        2000px"    
-                        fill
-                        className="object-cover absolute w-full h-full"
-                    /> : <div></div>}
-                </section>
-
                 <section className=" h-screen flex flex-col justify-end items-center px-2 sm:px-10 overflow-hidden w-full relative">
 
-                    <div className="backdrop-blur-md rounded-md p-4 max-w-[1280px] flex flex-col gap-6 relative mb-30">
+                    <div className="fixed top-0 flex justify-center w-screen h-80">
+                        <svg width="100%" height="100%" className="absolute top-0 flex justify-center z-50">
+                            <circle cx="39%" cy="50%" r="150" fill="none" stroke="#9C7945" strokeWidth="1" />
+                        </svg>
+                        <div className="flex flex-row items-center h-20 bg-secondary z-50 relative top-30">
+                            {logoIcon ?
+                                <div>
+                                    <Image
+                                        priority
+                                        src={logoIcon}
+                                        alt="logo"
+                                        quality={100}
+                                        width={80}
+                                        height={80}
+                                        className=""
+                                    />
+                                </div>
+                                : <div></div>}
+                            <div className="flex flex-col z-50">
+                                <h1 className="uppercase text-primary text-3xl sm:text-5xl font-medium leading-9 text-nowrap">{businessName}</h1>
+                                <h2
+                                    className={`${dancingScript.variable} text-xl text-nowrap tracking-[5px]`}
+                                    style={{
+                                        fontFamily: "var(--font-dancing-script)",
+                                        fontWeight: "400",
+                                        fontStyle: "normal",
+                                        color: "#124d18",
+                                        // fontSize: "1.5rem",
+                                        // letterSpacing: "11px",
+                                    }}
+                                >Opportunity Delivered</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="backdrop-blur-md rounded-md p-4 max-w-[1280px] flex flex-col gap-6 relative sm:mb-20 sm:mt-10">
                         <h1 className="md:text-5xl text-3xl uppercase md:normal-case font-bold text-center text-primary px-2">
                             Sell your house fast for the best price
                         </h1>
@@ -139,7 +150,7 @@ export default function Home() {
                             </span>
                             for your home.
                         </h2>
-                        <div className="h-14">
+                        <div className="h-14 px-2">
                             <Suspense fallback={<div className="pl-4 text-left text-gray-400 text-md sm:text-xl animate-pulse bg-white shadow-md w-full h-[53px] sm:h-[59px] rounded-lg relative mt-2 py-4">Address of property for sale</div>}>
                                 {isLoaded ? (
                                     <PlacesAutocomplete
@@ -156,21 +167,7 @@ export default function Home() {
                             We Buy Houses in All 50 States
                         </p>
                     </div>
-                    {/* <Image
-                        src={imageSrc}
-                        alt="House"
-                        quality={50}
-                        sizes="(max-width: 320px) 280px, 
-                        (max-width: 480px) 440px, 
-                        (max-width: 768px) 720px, 
-                        (max-width: 1024px) 960px, 
-                        (max-width: 1280px) 1200px,
-                        (max-width: 1536px) 1440px,
-                        2000px"
-                        priority
-                        fill
-                        className="absolute -z-50 brightness-75 object-cover overflow-hidden w-full"
-                    /> */}
+
                     <div className="w-screen flex h-40">
                         <span style={{
                             "clipPath": "ellipse(60% 85% at 50% 100%)",
@@ -179,6 +176,7 @@ export default function Home() {
                             "background": "#5E6D5A",
                         }}></span>
                     </div>
+
                 </section>
 
                 <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white pb-10">
@@ -346,7 +344,7 @@ export default function Home() {
                         theme="colored"
                     />
                 </Suspense>
-            </main>
+            </main >
 
         </>
     );

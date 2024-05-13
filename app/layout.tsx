@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Dancing_Script } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 
@@ -8,6 +8,7 @@ const inter = Inter({
     display: 'swap',
     variable: '--font-inter'
 })
+
 const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME
 
 export const metadata: Metadata = {
