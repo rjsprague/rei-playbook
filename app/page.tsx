@@ -2,9 +2,9 @@
 import Image from "next/image";
 import logoIcon from "../public/MovedByMillerLogoIcon.webp";
 import underline from "../public/underline.svg"
-import step1Image from "../public/step1.webp"
-import step2Image from "../public/step2.webp";
-import step3Image from "../public/step3.webp";
+import step1Image from "../public/online-survey.png"
+import step2Image from "../public/conversation.png";
+import step3Image from "../public/celebration.png";
 import why1Image from "../public/why1.webp";
 import why2Image from "../public/why2.webp";
 import why3Image from "../public/why3.webp";
@@ -161,8 +161,8 @@ export default function Home() {
                     <h2 className="text-3xl font-semibold text-center">
                         Sell to <span className="font-bold uppercase italic">{`${businessName}`}</span> and Skip the Hassle of Listing
                     </h2>
-                    <div className="flex sm:flex-row flex-col gap-4">
-                        <div className="flex flex-col gap-2 text-left max-w-[385px] sm:w-1/3">
+                    <div className="flex sm:flex-row flex-col gap-12">
+                        <div className="flex flex-col gap-2 text-left max-w-[300px] sm:w-1/3">
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={step1Image} alt="Step 1" loading="lazy" />
                             </div>
@@ -177,7 +177,7 @@ export default function Home() {
                                 minutes.
                             </p>
                         </div>
-                        <div className="flex flex-col gap-2 text-left max-w-[385px] sm:w-1/3">
+                        <div className="flex flex-col gap-2 text-left max-w-[300px] sm:w-1/3">
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={step2Image} alt="Step 2" loading="lazy" />
                             </div>
@@ -192,7 +192,7 @@ export default function Home() {
                                 buy your next home.
                             </p>
                         </div>
-                        <div className="flex flex-col gap-2 text-left max-w-[385px] sm:w-1/3">
+                        <div className="flex flex-col gap-2 text-left max-w-[300px] sm:w-1/3">
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={step3Image} alt="Step 3" loading="lazy" />
                             </div>
