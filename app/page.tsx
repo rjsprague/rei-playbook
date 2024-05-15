@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import logo from "../public/MovedByMillerLogo.webp";
 import logoIcon from "../public/MovedByMillerLogoIcon.webp";
 import underline from "../public/underline.svg"
 import step1Image from "../public/step1.webp"
@@ -10,11 +9,8 @@ import why1Image from "../public/why1.webp";
 import why2Image from "../public/why2.webp";
 import why3Image from "../public/why3.webp";
 import why4Image from "../public/why4.webp";
-import mobileHouseImage from "../public/mobileHouse.webp";
-import houseImage from "../public/HouseImage.webp";
 
 import Link from "next/link";
-import { FiPhoneCall } from "react-icons/fi";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { ToastContainer } from "react-toastify";
@@ -37,9 +33,6 @@ const libraries: ("places")[] = ["places"];
 
 export default function Home() {
     const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME;
-    const businessPhone = process.env.NEXT_PUBLIC_BUSINESS_PHONE;
-    const businessLogo = process.env.NEXT_PUBLIC_BUSINESS_LOGO;
-    const formattedPhone = businessPhone?.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     const currentYear = new Date().getFullYear();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -51,8 +44,6 @@ export default function Home() {
     const [zipCode, setZipCode] = useState("");
 
     const [loadMap, setLoadMap] = useState(false);
-    const [imageSrc, setImageSrc] = useState(mobileHouseImage);
-
     const [utmSource, setUtmSource] = useState("");
     const [utmCampaign, setUtmCampaign] = useState("");
     const [utmTerm, setUtmTerm] = useState("");
@@ -72,22 +63,6 @@ export default function Home() {
         setUtmTerm(term || "");
     }, []);
 
-    useEffect(() => {
-        // This function runs when the component mounts, and whenever the dependencies change
-        const handleResize = () => {
-            if (window.innerWidth < 500) {
-                setImageSrc(mobileHouseImage);
-            } else {
-                setImageSrc(houseImage);
-            }
-        };
-        handleResize();
-
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
         libraries,
@@ -101,13 +76,14 @@ export default function Home() {
     return (
         <>
             <main className="flex min-h-screen flex-col items-center justify-center bg-secondary">
-                <section className=" h-[90vh] flex flex-col justify-end items-center px-2 overflow-hidden w-full relative -mb-10">
+                {/* Above the fold */}
+                <section className="min-h-600:h-full h-screen flex flex-col justify-center items-center px-2 overflow-hidden w-full relative">
                     {/* logo */}
-                    <div className="absolute top-0 flex justify-center w-screen h-80">
-                        <svg width="100%" height="100%" className="absolute top-0 flex justify-center">
-                            <circle cx="39%" cy="50%" r="150" fill="none" stroke="#9C7945" strokeWidth="1" />
+                    <div className="relative flex justify-center w-[400px] sm:w-[600px] lg:w-[800px] h-80">
+                        <svg width="100%" height="100%" className="absolute overflow-visible hidden min-h-800:sm:flex">
+                            <circle cx="23.5%" cy="45%" r="130px" fill="none" stroke="#9C7945" strokeWidth="1" />
                         </svg>
-                        <div className="flex flex-row items-center h-20 bg-secondary relative top-30">
+                        <div className="flex flex-row items-center h-20 bg-secondary relative min-h-400:sm:top-10 min-h-800:top-25">
                             {logoIcon ?
                                 <div>
                                     <Image
@@ -124,7 +100,7 @@ export default function Home() {
                             <div className="flex flex-col">
                                 <h1 className="uppercase text-primary text-3xl md:text-4xl lg:text-5xl font-medium leading-9 text-nowrap">{businessName}</h1>
                                 <h2
-                                    className={`${dancingScript.variable} text-xl text-nowrap tracking-[5px] md:tracking-[7.5px] lg:tracking-[11px] lg:text-2xl`}
+                                    className={`${dancingScript.variable} text-xl text-nowrap tracking-[11px] md:tracking-[15px] lg:tracking-[21px] lg:text-2xl`}
                                     style={{
                                         fontFamily: "var(--font-dancing-script)",
                                         fontWeight: "400",
@@ -133,17 +109,17 @@ export default function Home() {
                                         // fontSize: "1.5rem",
                                         // letterSpacing: "11px",
                                     }}
-                                >Opportunity Delivered</h2>
+                                >Trust Tomorrow</h2>
                             </div>
                         </div>
                     </div>
                     {/* form */}
-                    <div className="p-3 max-w-[1280px] flex flex-col gap-4 relative justify-center mb-34 backdrop-blur-sm">
+                    <div className=" p-1 lg:p-3 max-w-[1280px] flex flex-col lg:gap-4 relative justify-center backdrop-blur-sm z-10">
                         <h1 className="md:text-4xl lg:text-5xl text-3xl uppercase md:normal-case font-bold text-center text-primary px-2">
                             Sell your house fast for the best price
                         </h1>
                         <h2 className="relative md:text-2xl text-xl md:normal-case flex font-normal text-center text-primary px-2 text-nowrap whitespace-nowrap flex-wrap justify-center">
-                            Complete this five-step form and receive a
+                            Complete this 6-step form to receive a
                             <span className=" md:text-2xl text-xl md:normal-case font-normal flex text-center text-primary px-2 flex-col justify-end items-end text-nowrap whitespace-nowrap">
                                 <span><strong>CASH</strong> offer</span>
                                 <Image src={underline} alt="underline" loading="lazy" className="w-30 -mt-1" />
@@ -163,21 +139,25 @@ export default function Home() {
                                 ) : <div className="pl-4 text-left text-gray-400 text-md sm:text-xl animate-pulse bg-white shadow-md w-full h-[53px] sm:h-[59px] rounded-lg relative mt-2 py-4">Address of property for sale</div>}
                             </Suspense>
                         </div>
-                        <p className="text-primary px-6">
-                            We Buy Houses in All 50 States
+                        <p className="text-primary px-6 mt-3">
+                            Enter the property address above to get started
                         </p>
                     </div>
+                    {/* Transition to next section ellipse */}
+                    <div className="w-screen flex h-40 -mb-1">
+                        <span style={{
+                            "clipPath": "ellipse(60% 85% at 50% 100%)",
+                            "height": "100%",
+                            "width": "100%",
+                            "background": "#5E6D5A",
+                        }}></span>
+                    </div>
                 </section>
-                <div className="w-screen flex h-40">
-                    <span style={{
-                        "clipPath": "ellipse(60% 85% at 50% 100%)",
-                        "height": "100%",
-                        "width": "100%",
-                        "background": "#5E6D5A",
-                    }}></span>
-                </div>
-                <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white pb-10">
 
+
+
+                {/* 3 Step Process */}
+                <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white pb-10">
                     <h2 className="text-3xl font-semibold text-center">
                         Sell to <span className="font-bold uppercase italic">{`${businessName}`}</span> and Skip the Hassle of Listing
                     </h2>
@@ -205,7 +185,7 @@ export default function Home() {
                                 Step 2
                             </h3>
                             <p className="text-left font-semibold">
-                                Get a competitive cash offer within 7 minutes.
+                                Meet with us in-person to build your offer.
                             </p>
                             <p className="text-md font-light">
                                 There&rsquo;s no financing fall-through risk so you can confidently
@@ -228,6 +208,24 @@ export default function Home() {
                                 double-mortgages.
                             </p>
                         </div>
+                    </div>
+                </section>
+
+                {/* About Moved By Miller */}
+                <section className="flex flex-col gap-4 px-4 py-20 w-full items-center">
+                    <h2 className="text-3xl font-semibold text-center">
+                        About <span className="text-primary font-bold uppercase italic">{`${businessName}`}</span>
+                    </h2>
+                    <div className="flex flex-col gap-4 text-left max-w-[768px]">
+                        <p>
+                            At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving the greater Birmingham area, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
+                        </p>
+                        <p>
+                            Transparency is at the core of our approach. We build your offer together, leveraging our expertise as licensed real estate agents to conduct a thorough comparative market analysis. This ensures that you receive a fair and competitive offer tailored to your unique situation. Unlike others, we prioritize personal connections over virtual appointments. By meeting in person, we ensure that our clients never feel like just another number.
+                        </p>
+                        <p>
+                            Our goal is to help families &lsquo;trust tomorrow&rsquo; by offering compassionate, expert guidance throughout the entire process. We handle the complexities of real estate transactions, allowing you to focus on moving forward to the next phase of your life. At Moved by Miller, we are dedicated to truly assisting our clients in overcoming challenges and achieving a fresh start.
+                        </p>
                     </div>
                 </section>
 
@@ -297,9 +295,6 @@ export default function Home() {
                             </h3>
                         </div>
                     </div>
-                    <h2 className="text-3xl font-semibold text-center">
-                        We Buy Houses in All 50 States
-                    </h2>
                 </section>
                 <footer className="flex flex-col gap-4 px-4 w-full">
                     <hr className="border-gray-300 w-full" />

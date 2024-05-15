@@ -191,7 +191,7 @@ const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setAddressLatLn
         <div
             ref={formRef}
             style={isSticky ? { position: 'fixed', top: '0px' } : {}}
-            className={` my-2 sm:w-full transition-all duration-150 ease-in-out ${isSticky ? "w-full max-w-[90%] xl:max-w-[1280px] left-1/2 -translate-x-1/2" : "relative"}`}
+            className={`z-20 my-2 sm:w-full transition-all duration-150 ease-in-out ${isSticky ? "w-full max-w-[90%] xl:max-w-[1280px] left-1/2 -translate-x-1/2" : "relative"}`}
         >
 
             <div
@@ -204,12 +204,12 @@ const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setAddressLatLn
                     onChange={handleInput}
                     disabled={!ready}
                     className={"w-full h-full py-4 pl-4 pr-2 rounded-lg  shadow-md sm:text-xl text-left bg-white text-black" + (invalidAddressWarning ? " placeholder:text-red-500 border-2 border-red-500" : "")}
-                    placeholder={invalidAddressWarning ? invalidAddressWarning : "Address of property for sale"}
+                    placeholder={invalidAddressWarning ? invalidAddressWarning : "123 Main St, City, State, Zip Code"}
                 />
 
                 <button onClick={handleOfferClick} type="button" className="flex p-1.5 sm:p-2 font-bold text-lg rounded-lg items-center justify-center text-white bg-primary absolute top-1 bottom-1 sm:top-1 sm:bottom-1 right-1 sm:right-1  sm:w-36">Get Offer</button>
                 {/* We can use the "status" to decide whether we should display the dropdown or not */}
-                {status === "OK" && <ul className="absolute top-16 bg-white mx-2 shadow-md rounded-md p-2 cursor-pointer">{renderSuggestions()}</ul>}
+                {status === "OK" && <ul className="absolute top-16 bg-white mx-2 shadow-md rounded-md p-2 cursor-pointer z-50">{renderSuggestions()}</ul>}
             </div>
         </div>
     )
