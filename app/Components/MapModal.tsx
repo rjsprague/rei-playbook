@@ -33,6 +33,7 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
     const [motivation, setMotivation] = useState('');
     const [ownership, setOwnership] = useState('');
     const [timeframe, setTimeframe] = useState('');
+    const [acceptableOffer, setAcceptableOffer] = useState('');
 
     const router = useRouter();
 
@@ -70,7 +71,12 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
 
     const confirmMotivation = (motivation: string) => {
         setMotivation(motivation);
-        setViewState('form')
+        setViewState('offer')
+    }
+
+    const confirmOffer = (offer: string) => {
+        setAcceptableOffer(offer);
+        setViewState('form');
     }
 
     // validate name, give error if not valid
@@ -169,6 +175,7 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                 timeframe,
                 ownership,
                 motivation,
+                acceptableOffer,
                 utmSource,
                 utmCampaign,
                 utmTerm,
@@ -232,12 +239,13 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                         >
                             <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                 <Dialog.Title as="h3" className="text-2xl text-center mb-4 font-medium leading-6 text-gray-900">
-                                    {viewState === 'map' ? 'Is this the correct address?' 
-                                    : viewState === 'timeframe' ? 'How soon are you looking to sell?'
-                                    : viewState === 'ownership' ? 'Do you own the property?'
-                                    : viewState === 'motivation' ? 'Why are you selling?'
-                                    : viewState === 'form' ? 'Enter Your Details'                      
-                                    : 'Hmmmm... Something went wrong.'}
+                                    {viewState === 'map' ? 'Is this the correct address?'
+                                        : viewState === 'timeframe' ? 'How soon are you looking to sell?'
+                                            : viewState === 'ownership' ? 'Do you own the property?'
+                                                : viewState === 'motivation' ? 'Why are you selling?'
+                                                    : viewState === 'offer' ? 'Almost there!'
+                                                        : viewState === 'form' ? 'Enter Your Details'
+                                                            : 'Hmmmm... Something went wrong.'}
                                 </Dialog.Title>
                                 <hr className='mb-4' />
 
@@ -323,6 +331,17 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                         >
                                             Other
                                         </button>
+                                    </div>
+                                ) : viewState === 'offer' ? (
+                                    <div>
+                                        <p className="text-lg text-gray-700">If we were able to give you a fair cash offer today, what would be an acceptable offer?</p>
+                                        <input
+                                            type="text"
+                                            value={acceptableOffer}
+                                            onChange={(e) => confirmOffer(e.target.value)}
+                                            className="rounded-md border border-gray-300 bg-gray-100 shadow-inner p-2 w-full"
+                                            placeholder="Enter an amount"
+                                        />
                                     </div>
                                 ) : viewState === 'form' ? (
                                     // Form for user details
