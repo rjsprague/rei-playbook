@@ -75,6 +75,10 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
     }
 
     const confirmOffer = (offer: string) => {
+        if (!offer) {
+            toast.error('Please enter an amount');
+            return;
+        }
         setAcceptableOffer(offer);
         setViewState('form');
     }
@@ -338,10 +342,16 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                         <input
                                             type="text"
                                             value={acceptableOffer}
-                                            onChange={(e) => confirmOffer(e.target.value)}
+                                            onChange={(e) => setAcceptableOffer(e.target.value)}
                                             className="rounded-md border border-gray-300 bg-gray-100 shadow-inner p-2 w-full"
                                             placeholder="Enter an amount"
                                         />
+                                        <button
+                                            className="w-full mt-4 rounded-xl bg-primary py-4 text-white font-semibold text-xl hover:brightness-125"
+                                            onClick={() => confirmOffer(acceptableOffer)}
+                                        >
+                                            Next
+                                        </button>
                                     </div>
                                 ) : viewState === 'form' ? (
                                     // Form for user details
@@ -448,6 +458,17 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
 
                                         <div className="hidden">
                                             <input
+                                                id="acceptableOffer"
+                                                name="acceptableOffer"
+                                                value={acceptableOffer}
+                                                className="hidden"
+                                                required
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        <div className="hidden">
+                                            <input
                                                 id="utm_source"
                                                 name="utm_source"
                                                 value={utmSource}
@@ -487,7 +508,7 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                                 checked={termsChecked}
                                                 onChange={(e) => setTermsChecked(e.target.checked)}
                                             />
-                                            <label htmlFor="terms" className="ml-2 text-gray-700">I agree to the <Link href="/terms" className="text-primary underline">Terms and Conditions</Link> and the <Link href="/privacy" className="text-primary underline">Privacy Policy</Link></label>
+                                            <label htmlFor="terms" className="ml-2 text-gray-700">I agree to the <Link href="/terms" className="text-primary underline" target='_blank'>Terms and Conditions</Link> and the <Link href="/privacy" className="text-primary underline" target='_blank'>Privacy Policy</Link></label>
                                         </div>
 
                                         <div className="flex items-center border rounded-md border-gray-300 bg-gray-100 shadow-inner p-2">
@@ -504,11 +525,11 @@ const MapModal: React.FC<MapModalProps> = ({ isOpen, setIsOpen, addressLatLng, n
                                         <button
                                             className="rounded-xl bg-primary py-4 text-white font-semibold text-xl disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-125"
                                             type="submit"
-                                            disabled={!name || !email || !phone || !address || !termsChecked || !privacyChecked || submitting}
+                                            // disabled={!name || !email || !phone || !address || !termsChecked || !privacyChecked || submitting}
                                             onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSubmit(e)}
 
                                         >
-                                            {!name || !email || !phone || !address || !termsChecked || !privacyChecked ? "Form Incomplete" : submitting ? "Submitting" : "Get My Cash Offer"}
+                                            {submitting ? "Submitting" : "Get My Cash Offer"}
                                         </button>
                                         {<p className='text-red-500'>{submissionWarning}</p>}
                                     </form>

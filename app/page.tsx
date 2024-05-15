@@ -77,7 +77,7 @@ export default function Home() {
         <>
             <main className="flex min-h-screen flex-col items-center justify-center bg-secondary">
                 {/* Above the fold */}
-                <section className="min-h-600:h-full h-screen flex flex-col justify-center items-center px-2 overflow-hidden w-full relative">
+                <section className="h-screen flex flex-col justify-start min-h-600:justify-between items-center px-2 overflow-hidden w-full relative -mb-1">
                     {/* logo */}
                     <div className="relative flex justify-center w-[400px] sm:w-[600px] lg:w-[800px] h-80">
                         <svg width="100%" height="100%" className="absolute overflow-visible hidden min-h-800:sm:flex">
@@ -162,11 +162,11 @@ export default function Home() {
                         Sell to <span className="font-bold uppercase italic">{`${businessName}`}</span> and Skip the Hassle of Listing
                     </h2>
                     <div className="flex sm:flex-row flex-col gap-12">
-                        <div className="flex flex-col gap-2 text-left max-w-[300px] sm:w-1/3">
-                            <div className="aspect-w-16 aspect-h-9">
-                                <Image src={step1Image} alt="Step 1" loading="lazy" />
+                        <div className="flex flex-col justify-center items-center gap-2 text-left max-w-[250px] sm:w-1/3">
+                            <div className="flex">
+                                <Image src={step1Image} alt="Step 1" loading="lazy" height={200} width={150} />
                             </div>
-                            <h3 className="text-lg text-gray-100 font-light uppercase">
+                            <h3 className="text-xl text-gray-100 font-light uppercase">
                                 Step 1
                             </h3>
                             <p className="text-left font-semibold">
@@ -177,11 +177,11 @@ export default function Home() {
                                 minutes.
                             </p>
                         </div>
-                        <div className="flex flex-col gap-2 text-left max-w-[300px] sm:w-1/3">
-                            <div className="aspect-w-16 aspect-h-9">
-                                <Image src={step2Image} alt="Step 2" loading="lazy" />
+                        <div className="flex flex-col justify-center items-center gap-2 text-left max-w-[250px] sm:w-1/3">
+                            <div className="">
+                                <Image src={step2Image} alt="Step 2" loading="lazy" height={200} width={150} />
                             </div>
-                            <h3 className="text-lg text-gray-100 font-light uppercase">
+                            <h3 className="text-xl text-gray-100 font-light uppercase">
                                 Step 2
                             </h3>
                             <p className="text-left font-semibold">
@@ -192,11 +192,11 @@ export default function Home() {
                                 buy your next home.
                             </p>
                         </div>
-                        <div className="flex flex-col gap-2 text-left max-w-[300px] sm:w-1/3">
-                            <div className="aspect-w-16 aspect-h-9">
-                                <Image src={step3Image} alt="Step 3" loading="lazy" />
+                        <div className="flex flex-col justify-center items-center gap-2 text-left max-w-[250px] sm:w-1/3">
+                            <div className="">
+                                <Image src={step3Image} alt="Step 3" loading="lazy" height={200} width={150} />
                             </div>
-                            <h3 className="text-lg text-gray-100 font-light uppercase">
+                            <h3 className="text-xl text-gray-100 font-light uppercase">
                                 Step 3
                             </h3>
                             <p className="text-left font-semibold">
@@ -211,24 +211,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* About Moved By Miller */}
-                <section className="flex flex-col gap-4 px-4 py-20 w-full items-center">
-                    <h2 className="text-3xl font-semibold text-center">
-                        About <span className="text-primary font-bold uppercase italic">{`${businessName}`}</span>
-                    </h2>
-                    <div className="flex flex-col gap-4 text-left max-w-[768px]">
-                        <p>
-                            At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving the greater Birmingham area, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
-                        </p>
-                        <p>
-                            Transparency is at the core of our approach. We build your offer together, leveraging our expertise as licensed real estate agents to conduct a thorough comparative market analysis. This ensures that you receive a fair and competitive offer tailored to your unique situation. Unlike others, we prioritize personal connections over virtual appointments. By meeting in person, we ensure that our clients never feel like just another number.
-                        </p>
-                        <p>
-                            Our goal is to help families &lsquo;trust tomorrow&rsquo; by offering compassionate, expert guidance throughout the entire process. We handle the complexities of real estate transactions, allowing you to focus on moving forward to the next phase of your life. At Moved by Miller, we are dedicated to truly assisting our clients in overcoming challenges and achieving a fresh start.
-                        </p>
-                    </div>
-                </section>
-
+                {/* Comparison Section */}
                 <section className="flex flex-col gap-4 px-4 py-20 w-full items-center">
                     <h2 className="text-3xl font-semibold text-center">
                         Why Selling to <span className="text-primary font-bold uppercase italic">{`${businessName}`}</span> is Better
@@ -259,6 +242,25 @@ export default function Home() {
                     </div>
                 </section>
 
+                {/* About Moved By Miller */}
+                <section className="flex flex-col gap-4 px-4 py-20 w-full items-center">
+                    <h2 className="text-3xl font-semibold text-center">
+                        About <span className="text-primary font-bold uppercase italic">{`${businessName}`}</span>
+                    </h2>
+                    <div className="flex flex-col gap-4 text-left max-w-[768px]">
+                        <p>
+                            At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving the greater Birmingham area, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
+                        </p>
+                        <p>
+                            Transparency is at the core of our approach. We build your offer together, leveraging our expertise as licensed real estate agents to conduct a thorough comparative market analysis. This ensures that you receive a fair and competitive offer tailored to your unique situation. Unlike others, we prioritize personal connections over virtual appointments. By meeting in person, we ensure that our clients never feel like just another number.
+                        </p>
+                        <p>
+                            Our goal is to help families &lsquo;trust tomorrow&rsquo; by offering compassionate, expert guidance throughout the entire process. We handle the complexities of real estate transactions, allowing you to focus on moving forward to the next phase of your life. At Moved by Miller, we are dedicated to truly assisting our clients in overcoming challenges and achieving a fresh start.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Reasons Section */}
                 <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white py-10">
                     <h2 className="text-3xl font-semibold text-center">
                         Reasons Homeowners Sell with {`${businessName}`}
@@ -296,6 +298,8 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
+                {/* Footer */}
                 <footer className="flex flex-col gap-4 px-4 w-full">
                     <hr className="border-gray-300 w-full" />
                     <div className="flex flex-row justify-center space-x-4">

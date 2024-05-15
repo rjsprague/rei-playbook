@@ -193,7 +193,6 @@ const PlacesAutocomplete: React.FC<PlacesAutocompleteProps> = ({ setAddressLatLn
             style={isSticky ? { position: 'fixed', top: '0px' } : {}}
             className={`z-20 my-2 sm:w-full transition-all duration-150 ease-in-out ${isSticky ? "w-full max-w-[90%] xl:max-w-[1280px] left-1/2 -translate-x-1/2" : "relative"}`}
         >
-
             <div
                 ref={ref}
                 className=""
