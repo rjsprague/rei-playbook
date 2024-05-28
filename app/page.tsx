@@ -9,6 +9,8 @@ import why1Image from "../public/why1.webp";
 import why2Image from "../public/why2.webp";
 import why3Image from "../public/why3.webp";
 import why4Image from "../public/why4.webp";
+import ZachMiller from "../public/ZachMiller.webp";
+import { GoStarFill } from "react-icons/go";
 
 import Link from "next/link";
 import { useEffect, useState, lazy, Suspense } from "react";
@@ -154,8 +156,6 @@ export default function Home() {
                     </div>
                 </section>
 
-
-
                 {/* 3 Step Process */}
                 <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white pb-10">
                     <h2 className="text-3xl font-semibold text-center">
@@ -242,41 +242,141 @@ export default function Home() {
                     </div>
                 </section>
 
+                {/* Testimonials Section */}
+                <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white py-10">
+                    <h2 className="text-3xl font-semibold text-center">
+                        What Our Customers are Saying About Us
+                    </h2>
+                    <div className="flex flex-row flex-wrap sm:w-10/12 md:w-8/12 lg:w-6/12 gap-10">
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                            <div className="flex flex-col gap-2">
+                                <p>
+                                    &ldquo;I recently used Moved by Miller to sell a home I inherited. The home needed to go through probate, and I was completely unfamiliar with that process. Additionally, the home was in pretty rough shape, and I wasn&apos;t sure it would sell. Realtors I had spoken to previously told me I needed to fix many of the problems and repair the home, but I didn&apos;t have the money to do so.
+                                </p>
+                                <p>
+                                    Initially, it felt very overwhelming, but Zach from Moved by Miller was a lifesaver. He answered all my questions, connected me with a reliable probate attorney, and guided me through every step of the process. Zach went above and beyond by showing me exactly how he arrived at his offer. We actually built the offer together, which made me feel much more confident and involved in the process.
+                                </p>
+                                <p>
+                                    His expertise and support made what could have been a daunting experience surprisingly smooth. After probate was completed, we closed on the house in just about two days. I am confident that if I had used a regular realtor, the process wouldn&apos;t have been as seamless.
+                                </p>
+                                <p>
+                                    I cannot recommend Moved by Miller highly enough. Zach was a godsend with his professionalism, knowledge, and dedication to his clients truly setting him apart.&quot;
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex flex-row text-yellow-500">
+                                    <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
+                                </div>
+                                <h3 className="text-md text-gray-100 font-semibold">Richard F - Irondale</h3>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                            <div className="flex flex-col gap-2">
+                                <p>
+                                    &ldquo;Going through a divorce after 16 years of marriage was tough enough, but having to sell our home on top of that was heartbreaking. The judge ordered us to sell the home where we had built so many memories, and the whole idea of letting go was overwhelming.
+                                </p>
+                                <p>
+                                    That&apos;s when we met Zach from Moved by Miller. From the moment he stepped into our home, I knew we were in good hands. He asked about our timeline, gave us a fair offer, and immediately got to work. We ended up selling the home faster than expected, but Zach made sure we could stay for an extra two weeks while we got everything packed up.
+                                </p>
+                                <p>
+                                    Zach and the Moved by Miller team were a godsend during such a difficult time. Their professionalism and compassion made the process so much easier. I can&apos;t thank Zach enough and highly recommend Moved by Miller. Five stars all the way!&quot;
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex flex-row text-yellow-500">
+                                    <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
+                                </div>
+                                <h3 className="text-md text-gray-100 font-semibold">
+                                    Amanda T - Vestavia Hills
+                                </h3>
+                            </div>
+
+                        </div>
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                            <div className="flex flex-col gap-2">
+                                <p>
+                                    &quot;My wife and I were fed up with the shootings in Ensley. We knew we needed to move, but the realtor we picked said we had to do a ton of work on our house first. It sat on the market for over 130 days, and we only got a couple of lowball offers.
+                                </p>
+                                <p>
+                                    Then we met Zach from Moved by Miller, and he was an answered prayer. Such a kind young man who really cares about his customers. He sold our home, and we didn&apos;t have to do anything! The offer he gave us was exactly what we got no strings attached.
+                                </p>
+                                <p>
+                                    On top of that, Zach helped us find our dream home. He was selling another home for a different client, told us about it, and we went to see it. We fell in love and bought that home. The whole process took about two weeks.
+                                </p>
+                                <p>
+                                    I don&apos;t know where we&apos;d be without Zach. If you&apos;re thinking about selling, call Zach. He came in, listened to us, and took the weight off our shoulders. He met us where we were and made everything so much easier.&quot;
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex flex-row text-yellow-500">
+                                    <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
+                                </div>
+                                <h3 className="text-md text-gray-100 font-semibold">
+                                    Daryl and Debbie F - Ensley
+                                </h3>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                            <div className="flex flex-col gap-2">
+                                <p>
+                                    &quot;I inherited a home that needed a lot of repairs I couldn&apos;t afford and was unsure about selling. Working with Zach from Moved by Miller turned out to be a wonderful experience. He was kind, compassionate, and listened well. He wasn&apos;t pushy and helped me build an offer that fit my schedule perfectly.
+                                </p>
+                                <p>
+                                    Zach showed me different ways to sell or get out of the situation and asked which option I thought was best. His option was by far the best. The whole process was smooth and stress-free. I highly recommend Moved by Miller!&quot;
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex flex-row text-yellow-500">
+                                    <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
+                                </div>
+                                <h3 className="text-md text-gray-100 font-semibold">
+                                    Douglas G - Birmingham
+                                </h3>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
                 {/* About Moved By Miller */}
                 <section className="flex flex-col gap-4 px-4 py-20 w-full items-center">
                     <h2 className="text-3xl font-semibold text-center">
                         About <span className="text-primary font-bold uppercase italic">{`${businessName}`}</span>
                     </h2>
-                    <div className="flex flex-col gap-4 text-left max-w-[768px]">
-                        <p>
-                            At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving the greater Birmingham area, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
-                        </p>
-                        <p>
-                            Transparency is at the core of our approach. We build your offer together, leveraging our expertise as licensed real estate agents to conduct a thorough comparative market analysis. This ensures that you receive a fair and competitive offer tailored to your unique situation. Unlike others, we prioritize personal connections over virtual appointments. By meeting in person, we ensure that our clients never feel like just another number.
-                        </p>
-                        <p>
-                            Our goal is to help families &lsquo;trust tomorrow&rsquo; by offering compassionate, expert guidance throughout the entire process. We handle the complexities of real estate transactions, allowing you to focus on moving forward to the next phase of your life. At Moved by Miller, we are dedicated to truly assisting our clients in overcoming challenges and achieving a fresh start.
-                        </p>
+                    <div className="flex flex-col items-center sm:flex-row gap-8 sm:w-4/5">
+                        <Image src={ZachMiller} alt="Zach Miller" loading="lazy" width={250} height={500} className="flex rounded-lg shadow-xl shadow-gray-400 sm:self-start" />
+                        <div className="flex flex-col gap-4 text-left ">
+                            <p>
+                                At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving the greater Birmingham area, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
+                            </p>
+                            <p>
+                                Transparency is at the core of our approach. We build your offer together, leveraging our expertise as licensed real estate agents to conduct a thorough comparative market analysis. This ensures that you receive a fair and competitive offer tailored to your unique situation. Unlike others, we prioritize personal connections over virtual appointments. By meeting in person, we ensure that our clients never feel like just another number.
+                            </p>
+                            <p>
+                                Our goal is to help families &lsquo;trust tomorrow&rsquo; by offering compassionate, expert guidance throughout the entire process. We handle the complexities of real estate transactions, allowing you to focus on moving forward to the next phase of your life. At Moved by Miller, we are dedicated to truly assisting our clients in overcoming challenges and achieving a fresh start.
+                            </p>
+                        </div>
                     </div>
+
                 </section>
 
                 {/* Reasons Section */}
                 <section className="flex flex-col gap-8 px-4 items-center w-full bg-[#5E6D5A] text-white py-10">
                     <h2 className="text-3xl font-semibold text-center">
-                        Reasons Homeowners Sell with {`${businessName}`}
+                        Reasons Homeowners Sell with <span className="font-bold italic">{`${businessName}`}</span>
                     </h2>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <div className="flex flex-col gap-2 text-left max-w-[380px] sm:w-1/4">
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={why1Image} alt="Why 1" loading="lazy" />
                             </div>
-                            <h3 className="text-md text-gray-100 font-semibold">Sell Fast</h3>
+                            <h3 className="text-md text-gray-100 text-center font-semibold">Sell Fast</h3>
                         </div>
                         <div className="flex flex-col gap-2 text-left max-w-[380px] sm:w-1/4">
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={why2Image} alt="Why 2" loading="lazy" />
                             </div>
-                            <h3 className="text-md text-gray-100 font-semibold">
+                            <h3 className="text-md text-gray-100 text-center font-semibold">
                                 Avoid Costly Repairs
                             </h3>
                         </div>
@@ -284,7 +384,7 @@ export default function Home() {
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={why3Image} alt="Why 3" loading="lazy" />
                             </div>
-                            <h3 className="text-md text-gray-100 font-semibold">
+                            <h3 className="text-md text-gray-100 text-center font-semibold">
                                 Inherited Property
                             </h3>
                         </div>
@@ -292,7 +392,7 @@ export default function Home() {
                             <div className="aspect-w-16 aspect-h-9">
                                 <Image src={why4Image} alt="Why 4" loading="lazy" />
                             </div>
-                            <h3 className="text-md text-gray-100 font-semibold">
+                            <h3 className="text-md text-gray-100 text-center font-semibold">
                                 Avoid Foreclosure
                             </h3>
                         </div>
