@@ -248,7 +248,7 @@ export default function Home() {
                         What Our Customers are Saying About Us
                     </h2>
                     <div className="flex flex-row flex-wrap sm:w-10/12 md:w-8/12 lg:w-6/12 gap-10">
-                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4 bg-primary">
                             <div className="flex flex-col gap-2">
                                 <p>
                                     &ldquo;I recently used Moved by Miller to sell a home I inherited. The home needed to go through probate, and I was completely unfamiliar with that process. Additionally, the home was in pretty rough shape, and I wasn&apos;t sure it would sell. Realtors I had spoken to previously told me I needed to fix many of the problems and repair the home, but I didn&apos;t have the money to do so.
@@ -267,10 +267,10 @@ export default function Home() {
                                 <div className="flex flex-row text-yellow-500">
                                     <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
                                 </div>
-                                <h3 className="text-md text-gray-100 font-semibold">Richard F - Irondale</h3>
+                                <h3 className="text-md text-gray-100 font-semibold">Richard F</h3>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4 bg-primary">
                             <div className="flex flex-col gap-2">
                                 <p>
                                     &ldquo;Going through a divorce after 16 years of marriage was tough enough, but having to sell our home on top of that was heartbreaking. The judge ordered us to sell the home where we had built so many memories, and the whole idea of letting go was overwhelming.
@@ -287,15 +287,15 @@ export default function Home() {
                                     <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
                                 </div>
                                 <h3 className="text-md text-gray-100 font-semibold">
-                                    Amanda T - Vestavia Hills
+                                    Amanda T
                                 </h3>
                             </div>
 
                         </div>
-                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4 bg-primary">
                             <div className="flex flex-col gap-2">
                                 <p>
-                                    &quot;My wife and I were fed up with the shootings in Ensley. We knew we needed to move, but the realtor we picked said we had to do a ton of work on our house first. It sat on the market for over 130 days, and we only got a couple of lowball offers.
+                                    &quot;My wife and I were fed up with the shootings in our area. We knew we needed to move, but the realtor we picked said we had to do a ton of work on our house first. It sat on the market for over 130 days, and we only got a couple of lowball offers.
                                 </p>
                                 <p>
                                     Then we met Zach from Moved by Miller, and he was an answered prayer. Such a kind young man who really cares about his customers. He sold our home, and we didn&apos;t have to do anything! The offer he gave us was exactly what we got no strings attached.
@@ -312,11 +312,11 @@ export default function Home() {
                                     <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
                                 </div>
                                 <h3 className="text-md text-gray-100 font-semibold">
-                                    Daryl and Debbie F - Ensley
+                                    Daryl and Debbie F
                                 </h3>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-4 shadow-border-shadow p-4">
+                        <div className="flex flex-col gap-4 shadow-border-shadow p-4 bg-primary">
                             <div className="flex flex-col gap-2">
                                 <p>
                                     &quot;I inherited a home that needed a lot of repairs I couldn&apos;t afford and was unsure about selling. Working with Zach from Moved by Miller turned out to be a wonderful experience. He was kind, compassionate, and listened well. He wasn&apos;t pushy and helped me build an offer that fit my schedule perfectly.
@@ -330,7 +330,7 @@ export default function Home() {
                                     <GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill /><GoStarFill />
                                 </div>
                                 <h3 className="text-md text-gray-100 font-semibold">
-                                    Douglas G - Birmingham
+                                    Douglas G
                                 </h3>
                             </div>
                         </div>
@@ -347,7 +347,7 @@ export default function Home() {
                         <Image src={ZachMiller} alt="Zach Miller" loading="lazy" width={250} height={500} className="flex rounded-lg shadow-xl shadow-gray-400 sm:self-start" />
                         <div className="flex flex-col gap-4 text-left ">
                             <p>
-                                At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving the greater Birmingham area, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
+                                At <span className="font-bold italic">{`${businessName}`}</span>, we recognize that life can bring unexpected challenges requiring swift real estate solutions. Serving northwest Florida, our mission is to provide families with the support they need during difficult times. With 4 years of experience and over 300 transactions, I specialize in off-market homes that need to be sold quickly and efficiently.
                             </p>
                             <p>
                                 Transparency is at the core of our approach. We build your offer together, leveraging our expertise as licensed real estate agents to conduct a thorough comparative market analysis. This ensures that you receive a fair and competitive offer tailored to your unique situation. Unlike others, we prioritize personal connections over virtual appointments. By meeting in person, we ensure that our clients never feel like just another number.
