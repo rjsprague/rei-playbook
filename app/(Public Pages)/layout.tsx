@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import '../globals.css'
 import Script from 'next/script'
 import { Analytics } from "@vercel/analytics/react"
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -29,35 +30,10 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <head>
-                {searchConsole && <meta name="google-site-verification" content={`${searchConsole}`} />}
-                {/* Google Tag Manager */}
-                {gtmId && (
-                    <>
-                        <Script
-                            src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}`}
-                            strategy="afterInteractive"
-                        />
-                        <Script id="google-analytics" strategy="afterInteractive">
-                            {
-                                `window.dataLayer = window.dataLayer || [];
-                                function gtag(){dataLayer.push(arguments);}
-                                gtag('js', new Date());
-                                gtag('config', '${gtmId}');`
-                            }
-                        </Script>
-                    </>
-                )}
-                {/* End Google Tag Manager */}
-            </head>
+            <GoogleTagManager gtmId="5S8X6KB2" />
             <body className={`${inter.variable} font-sans`}>
-                {/* <!-- Google Tag Manager (noscript) --> */}
-                {gtmId &&
-                    <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-                        height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
-                    </noscript>
-                }
-                {/* <!-- End Google Tag Manager (noscript) --> */}
+                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=5S8X6KB2"
+                    height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
                 {children}
                 <Analytics />
                 <div id="root"></div>
