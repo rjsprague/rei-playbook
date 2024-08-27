@@ -35,6 +35,7 @@ export default function Home() {
     const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME;
     const currentYear = new Date().getFullYear();
     const router = useRouter();
+    const [clientId, setClientId] = useState<string | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [formData, setFormData] = useState({
@@ -47,6 +48,25 @@ export default function Home() {
         utm_term: "" as string,
         oneFreeCourse: true as boolean,
     });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (typeof window !== 'undefined' && window.ga) {
+                const trackers = window.ga.getAll();
+                console.log("Trackers:", trackers);
+                if (trackers && trackers.length > 0) {
+                    const gaClientId = trackers[0].get('clientId');
+                    console.log("GA Client ID:", gaClientId);
+                    if (gaClientId) {
+                        setClientId(gaClientId);
+                        clearInterval(interval); // Stop the interval once clientId is fetched
+                    }
+                }
+            }
+        }, 100); // Try every 100ms until it's available
+
+        return () => clearInterval(interval);
+    }, []);
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -162,10 +182,10 @@ export default function Home() {
                 setSubmitting(false);
                 setIsOpen(false);
                 router.push("/next-steps");
-            } else if(response.status === 400) {
+            } else if (response.status === 400) {
                 toast.error("You already have a free course. Please check your email for access.");
             }
-             else {
+            else {
                 throw new Error("Failed to submit form. Please try again.");
             }
             setSubmitting(false);
@@ -179,6 +199,7 @@ export default function Home() {
     return (
         <>
             <main className="flex min-h-screen flex-col items-center justify-center bg-tertiary">
+                  
                 {/* Above the fold */}
                 <section className="flex flex-col justify-start items-center px-4 overflow-hidden w-full py-10 min-h-screen">
                     {/* logo */}
@@ -196,7 +217,8 @@ export default function Home() {
                     {/* Hero */}
                     <div className="flex flex-col gap-5 sm:gap-10 w-full justify-center items-center">
                         <h1 className="md:text-4xl lg:text-5xl text-3xl font-bold text-center text-white px-2 mt-6 sm:m-10">
-                            What Do You Need the Most Help With?
+                            What Do You Need the Most Help With?<br />
+                            CLIENT ID IS {clientId}
                         </h1>
                         <div className="flex flex-row flex-wrap gap-4 lg:gap-8 items-center justify-center">
                             <div className="shadow-super px-2 py-4 bg-primary rounded hover:brightness-125 flex w-78 h-64">
@@ -708,7 +730,7 @@ export default function Home() {
                         >Yes, I want access to the Conversion KPIs Masterclass for FREE!</Button>
                     </div>
                 </section>
-                
+
                 {/* Footer */}
                 <footer className="flex flex-col gap-4 px-4 w-full text-gray-100">
                     <hr className="border-gray-300 w-full" />
