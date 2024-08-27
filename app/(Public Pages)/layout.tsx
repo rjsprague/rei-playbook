@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
-import { Analytics } from "@vercel/analytics/react"
-import { GoogleTagManager } from '@next/third-parties/google'
+// import { Analytics } from "@vercel/analytics/react"
+// import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
 
 const inter = Inter({
@@ -31,7 +31,7 @@ export default function RootLayout({
                 {(
                     <>
                         <Script
-                            src={`https://www.googletagmanager.com/gtm.js?id=P23CH2LP`}
+                            src={`https://www.googletagmanager.com/gtm.js?id=5S8X6KB2`}
                             strategy="afterInteractive"
                         />
                         <Script id="google-analytics" strategy="afterInteractive">
@@ -39,8 +39,7 @@ export default function RootLayout({
                                 window.dataLayer = window.dataLayer || [];
                                 function gtag(){dataLayer.push(arguments);}
                                 gtag('js', new Date());
-
-                                gtag('config', 'P23CH2LP');
+                                gtag('config', '5S8X6KB2');
                             `}
                         </Script>
                     </>
@@ -49,10 +48,10 @@ export default function RootLayout({
             </head>
             {/* <GoogleTagManager gtmId="5S8X6KB2" /> */}
             <body className={`${inter.variable} font-sans`}>
-                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=P23CH2LP"
+                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=5S8X6KB2"
                     height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
                 {children}
-                <Analytics />
+                {/* <Analytics /> */}
                 <div id="root"></div>
                 <div id="sticky-portal" className=""></div>
             </body>
