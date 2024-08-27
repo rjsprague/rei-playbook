@@ -61,35 +61,35 @@ export default function Home() {
         const campaign = urlParams.get("utm_campaign") || "";
         const term = urlParams.get("utm_term") || "";
 
-        if (source !== "ntsmhf" && source !== "NTSMHF") {
-            // disable mouse buttons and links
-            document.oncontextmenu = function (e) {
-                e.preventDefault();
-            };
-            document.onmousedown = function (e) {
-                e.preventDefault();
-            };
-            document.onmouseup = function (e) {
-                e.preventDefault();
-            };
-            document.onselectstart = function (e) {
-                e.preventDefault();
-            };
-            document.onselect = function (e) {
-                e.preventDefault();
-            };
-            document.ondragstart = function (e) {
-                e.preventDefault();
-            };
-            document.onkeydown = function (e) {
-                e.preventDefault();
-            };
-            document.onkeyup = function (e) {
-                e.preventDefault();
-            };
+        // if (source !== "ntsmhf" && source !== "NTSMHF") {
+        //     // disable mouse buttons and links
+        //     document.oncontextmenu = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.onmousedown = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.onmouseup = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.onselectstart = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.onselect = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.ondragstart = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.onkeydown = function (e) {
+        //         e.preventDefault();
+        //     };
+        //     document.onkeyup = function (e) {
+        //         e.preventDefault();
+        //     };
             // disable access to the page if the source is not NTSMHF
-            router.push("https://www.reiautomated.io");
-        }
+            // router.push("https://www.reiautomated.io");
+        // }
 
         setFormData(prevFormData => ({
             ...prevFormData,
