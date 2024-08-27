@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
-import Script from 'next/script'
 import { Analytics } from "@vercel/analytics/react"
 import { GoogleTagManager } from '@next/third-parties/google'
 
@@ -24,10 +23,6 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-
-    const gtmId = process.env.NEXT_PUBLIC_GTM_ID
-    const searchConsole = process.env.NEXT_PUBLIC_SEARCH_CONSOLE_VERIFICATION
-
     return (
         <html lang="en">
             <GoogleTagManager gtmId="5S8X6KB2" />
@@ -38,8 +33,6 @@ export default function RootLayout({
                 <Analytics />
                 <div id="root"></div>
                 <div id="sticky-portal" className=""></div>
-
-
             </body>
         </html>
     )
