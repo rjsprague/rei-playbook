@@ -1,26 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createPool } from '@vercel/postgres';
+// import { createPool } from '@vercel/postgres';
 
 import axios from 'axios';
 import twilio from 'twilio';
 
-const pool = createPool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
+// const pool = createPool({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: {
+//         rejectUnauthorized: false
+//     }
+// });
 
-async function saveLeadToDatabase(leadData: any) {
-    const { businessName, name, phone, email, address, zipCode, lat, lng, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm } = leadData;
-    const query = `INSERT INTO leads(business_name, name, phone, email, address, zip_code, latitude, longitude, timeframe, ownership, motivation, acceptable_offer, utm_source, utm_campaign, utm_term) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`;
-    const values = [businessName, name, phone, email, address, zipCode, lat, lng, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm];
-    try {
-        await pool.query(query, values);
-    } catch (error) {
-        console.error('Failed to save lead to database:', error);
-    }
-}
+// async function saveLeadToDatabase(leadData: any) {
+//     const { businessName, name, phone, email, address, zipCode, lat, lng, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm } = leadData;
+//     const query = `INSERT INTO leads(business_name, name, phone, email, address, zip_code, latitude, longitude, timeframe, ownership, motivation, acceptable_offer, utm_source, utm_campaign, utm_term) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`;
+//     const values = [businessName, name, phone, email, address, zipCode, lat, lng, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm];
+//     try {
+//         await pool.query(query, values);
+//     } catch (error) {
+//         console.error('Failed to save lead to database:', error);
+//     }
+// }
 
 // Utility function for sending an alert email
 async function alertFailure(emailWebhookUrl: string, failedData: any) {
@@ -125,7 +125,7 @@ export async function POST(req: NextRequest) {
     const { businessName, businessEmail, name, phone, email, address, zipCode, addressLatLng: { lat, lng }, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm } = leadData;
 
     // Save lead data to the database immediately for persistence
-    await saveLeadToDatabase({ businessName, name, phone, email, address, zipCode, lat, lng, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm });
+    // await saveLeadToDatabase({ businessName, name, phone, email, address, zipCode, lat, lng, timeframe, ownership, motivation, acceptableOffer, utmSource, utmCampaign, utmTerm });
 
     const accountSid = process.env.TWILIO_ACCOUNT_SID as string;
     const authToken = process.env.TWILIO_AUTH_TOKEN as string;

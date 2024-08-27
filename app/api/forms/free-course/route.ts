@@ -4,11 +4,26 @@ import { NextRequest, NextResponse } from 'next/server';
 import { retryFetch } from "@/app/lib/retryFetch";
 import { alertFailure } from "@/app/lib/failureAlert";
 import { splitName } from "@/app/lib/splitName";
+import { sql } from '@vercel/postgres';
 
 export async function POST(req: NextRequest) {
 
     const body = await req.text();
     let data = JSON.parse(body);
+
+    // Check if the user already exists in the database
+    const user = await sql`SELECT * FROM users WHERE email = ${data.email};`;
+    // If the user already exists, set dbURL to /api/postgres/users/update, else create a new user
+    // If the user.oneFreeCourse if true, return a message that the user has received a free course
+
+    if (user && user.rows.length > 0) {
+        data.dbURL = '/api/postgres/users/update';
+        if (user.rows[0].oneFreeCourse) {
+            return NextResponse.json({ message: 'You have already received a free course' });
+        }
+    } else {
+        data.dbURL = '/api/postgres/users/create';
+    }
 
     // Split the name into first and last name
     const [firstName, lastName] = splitName(data.name);
@@ -21,6 +36,7 @@ export async function POST(req: NextRequest) {
         '/api/berserker-mail',
         '/api/podio',
         '/api/notification/slack',
+        data.dbURL,
         // '/api/notification/email'
     ];
 

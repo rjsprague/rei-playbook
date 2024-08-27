@@ -19,11 +19,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-// const MapModal = lazy(() => import('./Components/MapModal'));
-// const PlacesAutocomplete = lazy(() => import('./Components/PlacesAutocomplete'));
-
-// const libraries: ("places")[] = ["places"];
-
 const courses = [
     { id: 'M4M', name: 'Marketing for Motivation' },
     { id: 'TCPP', name: 'Triage Call & Perfect Presentation' },
@@ -50,6 +45,7 @@ export default function Home() {
         utm_source: "" as string,
         utm_campaign: "" as string,
         utm_term: "" as string,
+        oneFreeCourse: false as boolean,
     });
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -152,7 +148,7 @@ export default function Home() {
         }
 
         try {
-            const response = await fetch("/api/form-submit", {
+            const response = await fetch("/api/forms/free-course", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -166,7 +162,10 @@ export default function Home() {
                 setSubmitting(false);
                 setIsOpen(false);
                 router.push("/next-steps");
-            } else {
+            } else if(response.status === 400) {
+                toast.error("You already have a free course. Please check your email for access.");
+            }
+             else {
                 throw new Error("Failed to submit form. Please try again.");
             }
         } catch (error) {
