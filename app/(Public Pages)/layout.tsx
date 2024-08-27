@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
 // import { Analytics } from "@vercel/analytics/react"
-// import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
 
 const inter = Inter({
@@ -28,10 +28,10 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 {/* Google Tag Manager */}
-                {(
+                {/* {(
                     <>
                         <Script
-                            src={`https://www.googletagmanager.com/gtm.js?id=5S8X6KB2`}
+                            src={`https://www.googletagmanager.com/gtm.js?id=GTM-5S8X6KB2`}
                             strategy="afterInteractive"
                         />
                         <Script id="google-analytics" strategy="afterInteractive">
@@ -39,16 +39,16 @@ export default function RootLayout({
                                 window.dataLayer = window.dataLayer || [];
                                 function gtag(){dataLayer.push(arguments);}
                                 gtag('js', new Date());
-                                gtag('config', '5S8X6KB2');
+                                gtag('config', 'GTM-5S8X6KB2');
                             `}
                         </Script>
                     </>
-                )}
+                )} */}
                 {/* End Google Tag Manager */}
             </head>
-            {/* <GoogleTagManager gtmId="5S8X6KB2" /> */}
+            <GoogleTagManager gtmId="GTM-5S8X6KB2" />
             <body className={`${inter.variable} font-sans`}>
-                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=5S8X6KB2"
+                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S8X6KB2"
                     height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
                 {children}
                 {/* <Analytics /> */}
