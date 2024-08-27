@@ -45,7 +45,7 @@ export default function Home() {
         utm_source: "" as string,
         utm_campaign: "" as string,
         utm_term: "" as string,
-        oneFreeCourse: false as boolean,
+        oneFreeCourse: true as boolean,
     });
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -168,6 +168,7 @@ export default function Home() {
              else {
                 throw new Error("Failed to submit form. Please try again.");
             }
+            setSubmitting(false);
         } catch (error) {
             toast.error("Failed to submit form. Please try again.");
             console.error("Form submission error:", error);

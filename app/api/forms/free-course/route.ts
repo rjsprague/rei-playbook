@@ -5,24 +5,38 @@ import { retryFetch } from "@/app/lib/retryFetch";
 import { alertFailure } from "@/app/lib/failureAlert";
 import { splitName } from "@/app/lib/splitName";
 import { sql } from '@vercel/postgres';
+import UAParser from 'ua-parser-js';
 
-export async function POST(req: NextRequest) {
+interface CustomNextRequest extends NextRequest {
+    clientIp?: string;
+}
+
+export async function POST(req: CustomNextRequest) {
+    const ip = req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for') || req.clientIp;
+
+    const ua = new UAParser(req.headers.get('user-agent') || '');
+    const deviceInfo = ua.getResult();
+
+    console.log('IP:', ip);
+    console.log('Device:', deviceInfo);
 
     const body = await req.text();
     let data = JSON.parse(body);
 
     // Check if the user already exists in the database
     const user = await sql`SELECT * FROM users WHERE email = ${data.email};`;
-    // If the user already exists, set dbURL to /api/postgres/users/update, else create a new user
-    // If the user.oneFreeCourse if true, return a message that the user has received a free course
+
+    console.log(user);
+
+    let dbURL = '/api/postgres/users/create';
 
     if (user && user.rows.length > 0) {
-        data.dbURL = '/api/postgres/users/update';
+        // If the user already exists, set dbURL to update the user
+        dbURL = '/api/postgres/users/update';
         if (user.rows[0].oneFreeCourse) {
+            // If the user.oneFreeCourse is true, return a message that the user has received a free course
             return NextResponse.json({ message: 'You have already received a free course' });
         }
-    } else {
-        data.dbURL = '/api/postgres/users/create';
     }
 
     // Split the name into first and last name
@@ -33,10 +47,10 @@ export async function POST(req: NextRequest) {
 
     // Define the API endpoints
     const apiEndpoints = [
-        '/api/berserker-mail',
-        '/api/podio',
-        '/api/notification/slack',
-        data.dbURL,
+        // '/api/berserker-mail',
+        // '/api/podio',
+        // '/api/notification/slack',
+        dbURL,
         // '/api/notification/email'
     ];
 
