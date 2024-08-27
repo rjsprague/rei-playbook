@@ -16,7 +16,9 @@ const config: Config = {
             },
             boxShadow: {
                 'outline-gray': '0 0 0 3px rgba(113, 128, 150, 0.5)',
-                'border-shadow': '0 0 5px rgba(0,0,0,.5)'
+                'border-shadow': '0 0 5px rgba(0,0,0,.5)',
+                'stripe-shadow': 'rgba(100, 100, 100, 0.35) 0px 50px 100px -20px, rgba(200, 200, 200, 0.25) 0px 30px 60px -30px, rgba(0, 0, 0, 0.5) 0px -2px 6px 0px inset',
+                'super': 'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;'
             },
             spacing: {
                 px: '1px',
@@ -112,6 +114,7 @@ const config: Config = {
         colors: {
             primary: process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#000000',
             secondary: process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#FFFFFF',
+            tertiary: '#002952',
             white: '#FFFFFF',
             black: '#000000',
             gray: {
@@ -137,15 +140,15 @@ const config: Config = {
                 900: '#002433',
             },
             green: {
-                100: '#E6FFE6',
-                200: '#BFFFBF',
-                300: '#99FF99',
-                400: '#4DFF4D',
-                500: '#00FF00',
-                600: '#00E600',
-                700: '#009900',
-                800: '#006600',
-                900: '#003300',
+                100: '#E6FFF3',
+                200: '#BFFFE0',
+                300: '#99FFCC',
+                400: '#4DFF99',
+                500: '#00FF66',
+                600: '#00E659',
+                700: '#009933',
+                800: '#006B26',
+                900: '#004D1A',
             },
             yellow: {
                 100: '#FFFCE6',
@@ -191,6 +194,40 @@ const config: Config = {
                 800: '#730046',
                 900: '#4D002F',
             },
+            orange: {
+                100: '#FFF3E6',
+                200: '#FFE6BF',
+                300: '#FFD999',
+                400: '#FFC14D',
+                500: '#FFAA00',
+                600: '#E69900',
+                700: '#996600',
+                800: '#734C00',
+                900: '#4D3300',
+            },
+            gold: {
+                100: '#FFF3E6',
+                200: '#FFE6BF',
+                300: '#FFD999',
+                400: '#FFC14D',
+                500: '#FFAA00',
+                600: '#E69900',
+                700: '#996600',
+                800: '#734C00',
+                900: '#4D3300',
+            },
+            silver: {
+                100: '#F3F3F3',
+                200: '#E6E6E6',
+                300: '#D9D9D9',
+                400: '#BFBFBF',
+                500: '#A5A5A5',
+                600: '#949494',
+                700: '#626262',
+                800: '#464646',
+                900: '#2F2F2F',
+            },
+
         }, // Add comma here
     },
     plugins: [],

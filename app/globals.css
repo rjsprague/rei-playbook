@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-image {
-    background-image: url('../public/mobileHouse.webp');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-@media (min-width: 501px) {
-    .main-image {
-        background-image: url('../public/HouseImage.webp');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-    }
+html {
+    scroll-behavior: smooth;
 }
