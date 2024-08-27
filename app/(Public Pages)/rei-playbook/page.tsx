@@ -9,7 +9,7 @@ import dsdMockup from "@/public/DSDwebP.webp"
 import adaMockup from "@/public/ADAwebP.webp"
 import psaMockup from "@/public/PSAwebP.webp"
 import ffMockup from "@/public/FundingFormulaWebP.webp"
-import acqdisMockup from "@/public/AcqDiswebP.webp"
+import acqdisMockup from "@/public/acq-dis-webp.webp"
 import ckmMockup from "@/public/CKMwebP.webp"
 import reiPlaybookMockup from "@/public/REIPlaybookMockup.webp"
 import juneKPIs from "@/public/juneKPIs.avif"
@@ -17,8 +17,20 @@ import Link from "next/link";
 import { useEffect, useState, Suspense } from "react";
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import FreeTrialButton from "@/app/components/FreeTrialButton";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+
+const courses = [
+    { id: 'M4M', name: 'Marketing for Motivation' },
+    { id: 'TCPP', name: 'Triage Call & Perfect Presentation' },
+    { id: 'DSD', name: 'Deal Structure Dictionary' },
+    { id: 'ADA', name: 'AutoDeal Analyzer' },
+    { id: 'PSA', name: 'The Strongest PSA' },
+    { id: 'FF', name: 'Funding Formula' },
+    { id: 'AcqDis', name: 'Acquisitions & Dispositions' },
+    { id: 'CKM', name: 'Conversion KPIs Masterclass' }
+]
 
 
 export default function Page() {
@@ -69,33 +81,6 @@ export default function Page() {
                             />
                         </div>
                     </div>
-                    {/* Hero */}
-                    <div className="flex flex-col gap-5 sm:gap-10 text-primary py-10 px-2 items-center">
-                        <h1 className="text-4xl sm:text-6xl text-center font-bold px-2">
-                            Congratulations!
-                        </h1>
-                        <h2 className="text-2xl sm:text-3xl font-semibold">
-                            Your email is now confirmed and you have access to your course!
-                        </h2>
-                        <ol className="list-decimal list-inside space-y-4 sm:w-3/4">
-                            <h3 className="text-xl font-medium">NEXT STEPS:</h3>
-                            <li className="text-md sm:text-lg">
-                                <strong>CHECK</strong> your email for an email with the subject "Welcome to REI Automated Training and Tutorials Site"
-                            </li>
-                            <li className="text-md sm:text-lg">
-                                <strong>CLICK</strong> the "Login Here" link in the email
-                            </li>
-                            <li className="text-md sm:text-lg">
-                                <strong>SET</strong> a password for your account.
-                            </li>
-                            <li className="text-md sm:text-lg">
-                                <strong>LOGIN</strong> to your account and start learning!
-                            </li>
-                        </ol>
-                        <p className="text-md sm:text-lg sm:w-3/4">
-                            If for some reason you can't find the email then you can go here to login. Use the "Forgot Password" link to set a password for your account. Be sure to enter the same email address you used to sign up for the course. If you made a mistake when signing up you can try to sign up again. If all else fails you can email support@reiautomated.io and we will help you. Thanks for giving us the opportunity to help you in your REI business!
-                        </p>
-                    </div>
                 </section>
 
                 {/* REI Playbook Mastermind membership */}
@@ -121,7 +106,7 @@ export default function Page() {
                             The REI Playbook and REI Playbook Mastermind is my solution to providing as much as I possibly can for the most reasonable price.
                         </p>
                         <p>
-                            There is a lot of fluff out there in the REI guru space. I know, I've bought most of it. And after spending literally hundreds of thousands on courses, events, mentorships, coaching and applying it to my own business, I know what works and what doesn't. As a former Marine, I am only interested in keeping what works. The REI Playbook is almost everything I use in my own business (minus my CRM, phone service, and a few other things I show you in the courses) to do deals every month.
+                            There is a lot of fluff out there in the REI guru space. I know, I&apos;ve bought most of it. And after spending literally hundreds of thousands on courses, events, mentorships, coaching and applying it to my own business, I know what works and what doesn&apos;t. As a former Marine, I am only interested in keeping what works. The REI Playbook is almost everything I use in my own business (minus my CRM, phone service, and a few other things I show you in the courses) to do deals every month.
                         </p>
                         <p>
                             Here are my some of my KPIs for June, 2024
@@ -131,16 +116,16 @@ export default function Page() {
                             My team was able to use the $1855 we spent on ads to generate 32 leads, connect with 25, complete 14 triage calls, qualify 9 seller leads, analyze 8 deals, pitch 7 perfect presentations, and put 6 properties under contract worth about $120k. Some of those contracts might not work out, but at the end of the day I know we did pretty well and we had a great month.
                         </p>
                         <p>
-                            And while I can't guarantee you will get these results, or even anywhere close to them, I can provide you everything my team and I use to crush it every month. And I can provide it to you for a fraction of the cost of what I paid for it.
+                            And while I can&apos;t guarantee you will get these results, or even anywhere close to them, I can provide you everything my team and I use to crush it every month. And I can provide it to you for a fraction of the cost of what I paid for it.
                         </p>
                         <p>
-                            If you haven't had the chance yet to look through each of the course descriptions below I encourage you to do so.
+                            If you haven&apos;t had the chance yet to look through each of the course descriptions below I encourage you to do so.
                         </p>
                         <p>
-                            If, after reading through everything, you feel like this isn't worth the price tag, then just close the browser tab and enjoy your free course.
+                            If, after reading through everything, you feel like this isn&apos;t worth the price tag, then just close the browser tab and enjoy your free course.
                         </p>
                         <p>
-                            But if you feel like you are getting everything you need for a fraction of the price of what most others are charging, then just click the one of the buttons like the one below to start your 14-DAY FREE TRIAL to the REI Playbook and REI Playbook Mastermind. After test driving it I think you will agree that it's worth way more than $97 per month.
+                            But if you feel like you are getting everything you need for a fraction of the price of what most others are charging, then just click the one of the buttons like the one below to start your 14-DAY FREE TRIAL to the REI Playbook and REI Playbook Mastermind. After test driving it I think you will agree that it&apos;s worth way more than $97 per month.
                         </p>
                         <p>
                             To your success,<br />
@@ -196,7 +181,7 @@ export default function Page() {
                         {/* The Triage Call */}
                         <Image src={tcMockup} alt="Triage Call" />
                         <p>
-                            Qualifying seller leads is a crucial step in papering deals. With the Triage Call course you get a dynamic call script that changes based on the answers your seller lead gives you. It guides you through the conversation, making sure you don't miss anything, increases your chance of properly qualifying seller leads, so you can STOP wasting time on bad leads and start FOCUSING your time on the good ones.
+                            Qualifying seller leads is a crucial step in papering deals. With the Triage Call course you get a dynamic call script that changes based on the answers your seller lead gives you. It guides you through the conversation, making sure you don&apos;t miss anything, increases your chance of properly qualifying seller leads, so you can STOP wasting time on bad leads and start FOCUSING your time on the good ones.
                         </p>
                         <ol className="list-item list-inside space-y-4">
                             <li className="flex items-start space-x-2">
@@ -277,7 +262,7 @@ export default function Page() {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">PITCH</span> advanced deal structures like a pro with my in-depth training on Sub-To (with Retail and Wrap exits),  Creating 0% Owner Financing, and "The Hybrid". I don't just explain how it works, I give you the script and show you how I talk to sellers using it.</p>
+                                <p><span className="font-bold">PITCH</span> advanced deal structures like a pro with my in-depth training on Sub-To (with Retail and Wrap exits),  Creating 0% Owner Financing, and &quot;The Hybrid&quot;. I don&apos;t just explain how it works, I give you the script and show you how I talk to sellers using it.</p>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
@@ -296,7 +281,7 @@ export default function Page() {
                     <div className="flex flex-col gap-12 w-full sm:w-8/12">
                         <Image src={adaMockup} alt="AutoDeal Analyzer" />
                         <p>
-                            There are lots of deal analysis tools out there, but most of them probably don't calculate all of the potential exits and show profitability to you with the click of a button. Well, that's just ONE of the features of the AutoDeal Analyzer. Cut your desktop deal analysis down from hours to minutes so that you can get back on the phone with your sellers and pitch them on your preferred deal structure, using the Numbers in Depth to gain significant leverage in the negotiations process.
+                            There are lots of deal analysis tools out there, but most of them probably don&apos;t calculate all of the potential exits and show profitability to you with the click of a button. Well, that&apos;s just ONE of the features of the AutoDeal Analyzer. Cut your desktop deal analysis down from hours to minutes so that you can get back on the phone with your sellers and pitch them on your preferred deal structure, using the Numbers in Depth to gain significant leverage in the negotiations process.
                         </p>
                         <ol className="list-item list-inside space-y-4">
                             <li className="flex items-start space-x-2">
@@ -332,7 +317,7 @@ export default function Page() {
                     <div className="flex flex-col gap-12 w-full sm:w-8/12">
                         <Image src={psaMockup} alt="The Strongest PSA" />
                         <p>
-                            The lynchpin of your business is your contract. Regardless of your exit strategy, your contract needs to be an ironclad agreement that sellers can't walk away from easily. A poorly written contract will cost you deals that would have otherwise results in tens or even hundreds of thousands in profit. So why re-invent the wheel? With my contract plus training and supporting documents you can go to contract with confidence knowing that there is a contingency for basically every scenario you will face as a real estate investor.
+                            The lynchpin of your business is your contract. Regardless of your exit strategy, your contract needs to be an ironclad agreement that sellers can&apos;t walk away from easily. A poorly written contract will cost you deals that would have otherwise results in tens or even hundreds of thousands in profit. So why re-invent the wheel? With my contract plus training and supporting documents you can go to contract with confidence knowing that there is a contingency for basically every scenario you will face as a real estate investor.
                         </p>
                         <ol className="list-item list-inside space-y-4">
                             <li className="flex items-start space-x-2">
@@ -353,7 +338,7 @@ export default function Page() {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">DOCUMENTS</span> like a memorandum of contract, wholesale assignment contract, joint venture agreement, and more will ensure you are ready to rock 'n roll as a real estate investor.</p>
+                                <p><span className="font-bold">DOCUMENTS</span> like a memorandum of contract, wholesale assignment contract, joint venture agreement, and more will ensure you are ready to rock &apos;n roll as a real estate investor.</p>
                             </li>
                         </ol>
                         <FreeTrialButton setIsOpen={setIsOpen} />
@@ -368,12 +353,12 @@ export default function Page() {
                     <div className="flex flex-col gap-12 w-full sm:w-8/12">
                         <Image src={ffMockup} alt="Funding Formula" />
                         <p>
-                            Have you ever had deals that you couldn't handle because you didn't have enough money to fund them? Yeah, me too. In Funding Formula I give you the exact blueprint I developed and use in my own business to get people to line up to lend me their money. I personally have (as of July 2024) never put more than $1 into my deals. I borrow everything I need from private money lenders and in some (rare cases) hard money lenders. I have already borrowed over $10 million dollars from my list of over 100 lenders. And you can do this too.
+                            Have you ever had deals that you couldn&apos;t handle because you didn&apos;t have enough money to fund them? Yeah, me too. In Funding Formula I give you the exact blueprint I developed and use in my own business to get people to line up to lend me their money. I personally have (as of July 2024) never put more than $1 into my deals. I borrow everything I need from private money lenders and in some (rare cases) hard money lenders. I have already borrowed over $10 million dollars from my list of over 100 lenders. And you can do this too.
                         </p>
                         <ol className="list-item list-inside space-y-4">
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">LEARN</span> the basics of private money, the hard money lenders I have personally vetted and why you need to start leveraging other people's money, like yesterday.</p>
+                                <p><span className="font-bold">LEARN</span> the basics of private money, the hard money lenders I have personally vetted and why you need to start leveraging other people&apos;s money, like yesterday.</p>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
@@ -389,7 +374,7 @@ export default function Page() {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">FIND</span> private money lenders with ease in my "How to FIND PMLs" guide.  Includes how to talk to friends and family, Facebook Groups, in-person REIA events, converting cash buyers into PMLs, an RVM script, a cold calling script, an SMS blast template, and email templates.</p>
+                                <p><span className="font-bold">FIND</span> private money lenders with ease in my &quot;How to FIND PMLs&quot; guide.  Includes how to talk to friends and family, Facebook Groups, in-person REIA events, converting cash buyers into PMLs, an RVM script, a cold calling script, an SMS blast template, and email templates.</p>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
@@ -412,7 +397,7 @@ export default function Page() {
                     <div className="flex flex-col gap-12 w-full sm:w-8/12">
                         <Image src={acqdisMockup} alt="Acquisitions & Dispositions" />
                         <p>
-                            You've got your property under contract, now what? Well, if you are planning on taking title to the property there are a bunch of things you need to do. And this is why we created very simple, step-by-step checklists and supporting documents to make the process of acquiring properties as easy as possible. And we didn't stop there, we did it for the dispositions side as well. This is our Acquisitions & Dispositions project management system. You will get access to all of the templates, bring them into Asana, and manage all of your projects that are under contract.
+                            You&apos;ve got your property under contract, now what? Well, if you are planning on taking title to the property there are a bunch of things you need to do. And this is why we created very simple, step-by-step checklists and supporting documents to make the process of acquiring properties as easy as possible. And we didn&apos;t stop there, we did it for the dispositions side as well. This is our Acquisitions & Dispositions project management system. You will get access to all of the templates, bring them into Asana, and manage all of your projects that are under contract.
                         </p>
                         <ol className="list-item list-inside space-y-4">
                             <li className="flex items-start space-x-2">
@@ -425,15 +410,15 @@ export default function Page() {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">PROCESSES</span> for every kind of exit strategy. Wholesale? Check. Novation? Check. Rental? Check. Wrap? Check. Wholetail/Retail? Check. Never find yourself lost again trying to figure out what you did or didn't do on your deals. Follow the process.</p>
+                                <p><span className="font-bold">PROCESSES</span> for every kind of exit strategy. Wholesale? Check. Novation? Check. Rental? Check. Wrap? Check. Wholetail/Retail? Check. Never find yourself lost again trying to figure out what you did or didn&apos;t do on your deals. Follow the process.</p>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">DEEP DIVE</span> into how we use Asana to manage projects with "Setting Up Asana", "Asana: Deep Dive" and "How to Transition to Asana" trainings.</p>
+                                <p><span className="font-bold">DEEP DIVE</span> into how we use Asana to manage projects with &quot;Setting Up Asana&quot;, &quot;Asana: Deep Dive&quot; and &quot;How to Transition to Asana&quot; trainings.</p>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">DON'T</span> lose sleep over lost deals anymore with my Deal Lost Checklist. Wrap it up and move on to the next one without any regrets.</p>
+                                <p><span className="font-bold">DON&apos;T</span> lose sleep over lost deals anymore with my Deal Lost Checklist. Wrap it up and move on to the next one without any regrets.</p>
                             </li>
                         </ol>
                         <FreeTrialButton setIsOpen={setIsOpen} />
@@ -448,7 +433,7 @@ export default function Page() {
                     <div className="flex flex-col gap-12 w-full sm:w-8/12">
                         <Image src={ckmMockup} alt="Conversion KPIs Masterclass" />
                         <p>
-                            If you don't know your numbers you don't have a business. One of the most powerful tools we have to optimize a business are key performance indicators (KPIs). By tracking these numbers over time you can find the bottlenecks in your business and begin to make targeted adjustments. This allows you to focus energy in the places where it is going to have the biggest impact. It has made a massive impact in my real estate investing business and I strongly encourage you to take this very seriously. It will take you from struggling real estate investor to consistently profitable real estate investor. And in Conversion KPIs Masterclass, I don't just teach you the KPIs that convert and how to track them, I teach you how to implement best business practices into your business so you can optimize these KPIs and ultimately become a successful real estate investor.
+                            If you don&apos;t know your numbers you don&apos;t have a business. One of the most powerful tools we have to optimize a business are key performance indicators (KPIs). By tracking these numbers over time you can find the bottlenecks in your business and begin to make targeted adjustments. This allows you to focus energy in the places where it is going to have the biggest impact. It has made a massive impact in my real estate investing business and I strongly encourage you to take this very seriously. It will take you from struggling real estate investor to consistently profitable real estate investor. And in Conversion KPIs Masterclass, I don&apos;t just teach you the KPIs that convert and how to track them, I teach you how to implement best business practices into your business so you can optimize these KPIs and ultimately become a successful real estate investor.
                         </p>
                         <ol className="list-item list-inside space-y-4">
                             <li className="flex items-start space-x-2">
@@ -461,7 +446,7 @@ export default function Page() {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">SEND</span> the exact same initial automated messages that I do to improve your connection rate and start the ball rolling with seller leads even when you're sleeping.</p>
+                                <p><span className="font-bold">SEND</span> the exact same initial automated messages that I do to improve your connection rate and start the ball rolling with seller leads even when you&apos;re sleeping.</p>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
@@ -469,7 +454,7 @@ export default function Page() {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <FaCheck className="text-secondary flex-shrink-0 size-5" />
-                                <p><span className="font-bold">OPTIMIZE</span> your KPIS like connection rate, call rate, qualification rate, contract rate and acquisition rate. Don't just know your numbers. Optimize them. Soon you could be achieving an 88% connection like I do.</p>
+                                <p><span className="font-bold">OPTIMIZE</span> your KPIS like connection rate, call rate, qualification rate, contract rate and acquisition rate. Don&apos;t just know your numbers. Optimize them. Soon you could be achieving an 88% connection like I do.</p>
                             </li>
                         </ol>
                         <FreeTrialButton setIsOpen={setIsOpen} />
