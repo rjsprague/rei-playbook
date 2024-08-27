@@ -12,7 +12,7 @@ import ffMockup from "@/public/FundingFormulaWebP.webp"
 import acqdisMockup from "@/public/acq-dis-webp.webp"
 import ckmMockup from "@/public/CKMwebP.webp"
 import reiPlaybookMockup from "@/public/REIPlaybookMockup.webp"
-import juneKPIs from "@/public/juneKPIs.avif"
+import juneKPIs from "@/public/juneKPIs.webp"
 import Link from "next/link";
 import { useEffect, useState, Suspense } from "react";
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
