@@ -87,8 +87,8 @@ export default function Home() {
         //     document.onkeyup = function (e) {
         //         e.preventDefault();
         //     };
-            // disable access to the page if the source is not NTSMHF
-            // router.push("https://www.reiautomated.io");
+        // disable access to the page if the source is not NTSMHF
+        // router.push("https://www.reiautomated.io");
         // }
 
         setFormData(prevFormData => ({
@@ -772,7 +772,7 @@ export default function Home() {
                                         <Label className="w-16 font-semibold">Course:</Label>
                                         <Listbox onChange={handleCourseChange}>
                                             <ListboxButton className="relative z-10 w-full bg-gray-100 rounded-r-lg text-left py-1 pl-2">
-                                                {formData?.course?.name ? formData.course.name : "Select a course"}
+                                                {formData?.course?.name ? formData.course.name : "Select a course"}<FaChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2" />
                                             </ListboxButton>
                                             <ListboxOptions
                                                 transition
