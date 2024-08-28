@@ -80,8 +80,8 @@ export default function Home() {
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        const source = urlParams.get("utm_source") || "";
-        const campaign = urlParams.get("utm_campaign") || "";
+        const source = urlParams.get("source") || "";
+        const campaign = urlParams.get("campaign") || "";
         const term = urlParams.get("utm_term") || "";
 
         // if (source !== "ntsmhf" && source !== "NTSMHF") {
