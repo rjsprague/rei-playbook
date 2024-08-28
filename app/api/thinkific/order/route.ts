@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
 
         const validateHmac = (data: any, hash: string) => {
             const hmac = crypto.createHmac('sha256', thinkificApiKey).update(data).digest('hex');
-            console.log('HMAC:', hmac);
             return hmac === hash;
         };
 

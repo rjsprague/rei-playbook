@@ -85,10 +85,6 @@ export async function POST(req: NextRequest) {
             }),
         })
 
-        console.log('Enrollment response:', enrollmentResponse);
-        const data = await enrollmentResponse.json();
-        console.log('Enrollment data:', data); 
-
         if (enrollmentResponse.status === 201) {
             return NextResponse.json({ status: 'fulfilled', message: 'Data sent successfully' });
         } else {
