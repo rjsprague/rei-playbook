@@ -15,13 +15,13 @@ export async function POST(req: NextRequest) {
         }
 
         // remove all spaces and characters that are not numbers
-        let phone = data.phone.replace(/\D/g, '');
+        let phone = data?.phone ? data.phone.replace(/\D/g, '') : '';
 
         const payload = {
             "firstName": data.firstName,
             "lastName": data.lastName,
             "email": data.email,
-            "phone": phone,
+            "phone": phone || "",
             "tagNames": data.tags,
         }
 
@@ -31,9 +31,8 @@ export async function POST(req: NextRequest) {
         }
 
         const response = await axios.patch(data.bm_api_url, payload, { headers });
-
+        
         if (response.status === 200) {
-            // console.log(`Data sent to ${bm_api_url} successfully!`);
             return NextResponse.json({status: 'fulfilled', message: 'Data sent to BerserkerMail successfully!' });
         } else {
             return NextResponse.error();

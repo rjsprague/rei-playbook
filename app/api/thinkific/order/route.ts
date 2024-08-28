@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
 
         const validateHmac = (data: any, hash: string) => {
             const hmac = crypto.createHmac('sha256', thinkificApiKey).update(data).digest('hex');
-            console.log('HMAC:', hmac);
             return hmac === hash;
         };
 
@@ -30,8 +29,10 @@ export async function POST(req: NextRequest) {
         data.bm_api_url = process.env.BM_API_URL as string;
         data.slackNewLeadsUrl = process.env.SLACK_NEW_LEADS_URL as string;
         data.messageType = 'ThinkificOrder';
-
-        console.log('Thinkific Order Data:', data);
+        data.firstName = data.payload.user.first_name;
+        data.lastName = data.payload.user.last_name;
+        data.email = data.payload.user.email;
+        data.tags = [data.payload.product_name];
 
         // Define the API endpoints
         const apiEndpoints = [
