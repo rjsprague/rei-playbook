@@ -74,8 +74,8 @@ export async function POST(req: CustomNextRequest) {
     // Define the API endpoints
     const apiEndpoints = [
         '/api/berserker-mail',
-        '/api/podio',
-        '/api/notification/slack',
+        // '/api/podio',
+        // '/api/notification/slack',
         dbURL,
     ] as any;
 

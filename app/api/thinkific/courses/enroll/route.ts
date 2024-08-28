@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const authHeader = req.headers.get('Authorization');
+    const authHeader = req.headers.get('authorization');
     const thinkificApiKey = authHeader?.replace('Bearer ', '');
 
     if (thinkificApiKey !== process.env.THINKIFIC_API_KEY) {
@@ -35,15 +35,11 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        console.log('User Response:', userResponse);
-
         if (userResponse.status !== 200) {
             throw new Error('Something went wrong with the user request');
         }
 
         const userData = await userResponse.json();
-
-        console.log('User Data:', userData);
 
         if (userData.items.length === 0) {
             // create user if not found
@@ -67,21 +63,13 @@ export async function POST(req: NextRequest) {
                 throw new Error('Something went wrong with the user creation');
             }
 
-            console.log('Create User Response:', createUserResponse);
-
             const createUserData = await createUserResponse.json();
-
-            console.log('Create User Data:', createUserData);
 
             userID = createUserData.id;
             
         } else {
             userID = userData.items[0].id;
         }
-
-        console.log('User ID:', userID);
-        console.log('Course ID:', course_id);
-
 
         // enroll user in the course
         const enrollmentResponse = await fetch(thinkificEnrollUrl, {
@@ -97,7 +85,9 @@ export async function POST(req: NextRequest) {
             }),
         })
 
-        console.log('Enrollment Response:', enrollmentResponse);
+        console.log('Enrollment response:', enrollmentResponse);
+        const data = await enrollmentResponse.json();
+        console.log('Enrollment data:', data); 
 
         if (enrollmentResponse.status === 201) {
             return NextResponse.json({ status: 'fulfilled', message: 'Data sent successfully' });
