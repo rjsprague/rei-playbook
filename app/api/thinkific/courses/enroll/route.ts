@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getCurrentTimestamp } from "@/app/lib/currentTimestamp";
 
 export async function POST(req: NextRequest) {
     const authHeader = req.headers.get('authorization');
@@ -17,12 +18,14 @@ export async function POST(req: NextRequest) {
     const thinkificEnrollUrl = process.env.THINKIFIC_BASE_URL + '/enrollments';
     const thinkificUsersUrl = process.env.THINKIFIC_BASE_URL + `/users?page=1&limit=1&query%5Bemail%5D=${data.email}`;
 
+    // get current timestamp for enrollment
+    const currentTimestamp = getCurrentTimestamp();
+
     if (!email) {
         return NextResponse.error();
     }
 
     try {
-
         let userID = '';
 
         // Get user id from email
@@ -34,10 +37,6 @@ export async function POST(req: NextRequest) {
                 'Content-Type': 'application/json',
             }
         })
-
-        if (userResponse.status !== 200) {
-            throw new Error('Something went wrong with the user request');
-        }
 
         const userData = await userResponse.json();
 
@@ -64,7 +63,6 @@ export async function POST(req: NextRequest) {
             }
 
             const createUserData = await createUserResponse.json();
-
             userID = createUserData.id;
             
         } else {
@@ -82,6 +80,7 @@ export async function POST(req: NextRequest) {
             body: JSON.stringify({
                 course_id: course_id,
                 user_id: userID,
+                activated_at: currentTimestamp,
             }),
         })
 
