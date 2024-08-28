@@ -16,9 +16,9 @@ interface FailureAlertProps {
     client_id: string;
     ip: string;
     device: string;
-    utm_campaign: string;
-    utm_source: string;
-    utm_term: string;
+    campaign: string;
+    source: string;
+    term: string;
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
@@ -41,9 +41,9 @@ export const FailureAlert: React.FC<Readonly<FailureAlertProps>> = ({
     client_id,
     ip,
     device,
-    utm_campaign,
-    utm_source,
-    utm_term,
+    campaign,
+    source,
+    term,
 }) => (
     <div>
         <p>Hey, Ryan!</p>
@@ -56,8 +56,8 @@ export const FailureAlert: React.FC<Readonly<FailureAlertProps>> = ({
         <p>Client ID: {client_id}</p>
         <p>IP: {ip}</p>
         <p>Device: {device}</p>
-        <p>UTM Campaign: {utm_campaign}</p>
-        <p>UTM Source: {utm_source}</p>
-        <p>UTM Term: {utm_term}</p>
+        <p>UTM Campaign: {campaign}</p>
+        <p>UTM Source: {source}</p>
+        <p>UTM Term: {term}</p>
     </div>
 );

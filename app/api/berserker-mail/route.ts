@@ -7,24 +7,12 @@ async function patchToBerserkerMail(bm_api_key: string, bm_api_url: string, data
     // remove all spaces and characters that are not numbers
     let phone = data.phone.replace(/\D/g, '');
 
-    // build the tags array, no empty strings
-    let tagsArr = () => {
-        let tags = [
-            data.course.name,
-            `NTSMHF-${data.course.id}-ENROLL`,
-            data.one_free_course ? "ONE-FREE-COURSE" : "",
-            data.utm_campaign ? data.utm_campaign : "",
-            data.utm_source ? data.utm_source : ""
-        ]
-        return tags.filter(tag => tag !== "");
-    }
-
     const payload = {
         "firstName": data.firstName,
         "lastName": data.lastName,
         "email": data.email,
         "phone": phone,
-        "tagNames": tagsArr,
+        "tagNames": data.tags,
     }
 
     const headers = {

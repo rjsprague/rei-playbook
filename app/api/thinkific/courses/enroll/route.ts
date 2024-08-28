@@ -2,14 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCurrentTimestamp } from "@/app/lib/currentTimestamp";
 
 export async function POST(req: NextRequest) {
+    const authHeader = req.headers.get('Authorization');
+    const thinkificApiKey = authHeader?.replace('Bearer ', '');
+
+    if (thinkificApiKey !== process.env.THINKIFIC_API_KEY) {
+        throw new Error('Unauthorized');
+    }
+
     const timestamp = getCurrentTimestamp();
     console.log('Timestamp:', timestamp);
     const body = await req.text();
     const data = JSON.parse(body);
     console.log('Enroll Data:', data);
-    const { firstName, lastName, email, courseID, thinkificApiKey } = data;
+    const { firstName, lastName, email, course_id } = data;
 
-    console.log(firstName, lastName, email, courseID, thinkificApiKey);
+    console.log(firstName, lastName, email, course_id);
 
     const thinkificSubdomain = process.env.THINKIFIC_SUBDOMAIN;
     const thinkificBaseUrl = process.env.THINKIFIC_BASE_URL;
@@ -81,7 +88,7 @@ export async function POST(req: NextRequest) {
         }
 
         console.log('User ID:', userID);
-        console.log('Course ID:', courseID);
+        console.log('Course ID:', course_id);
 
 
         // enroll user in the course
@@ -93,7 +100,7 @@ export async function POST(req: NextRequest) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                course_id: courseID,
+                course_id: course_id,
                 user_id: userID,
             }),
         })

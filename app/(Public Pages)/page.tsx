@@ -43,10 +43,10 @@ export default function Home() {
         email: "" as string,
         phone: "" as string,
         course: {} as { id: string, name: string },
-        utm_source: "" as string,
-        utm_campaign: "" as string,
-        utm_term: "" as string,
-        oneFreeCourse: false as boolean,
+        source: "" as string,
+        campaign: "" as string,
+        term: "" as string,
+        one_free_course: false as boolean,
         client_id: "" as string
     });
 
@@ -116,9 +116,9 @@ export default function Home() {
 
         setFormData(prevFormData => ({
             ...prevFormData,
-            utm_source: source,
-            utm_campaign: campaign,
-            utm_term: term,
+            source: source,
+            campaign: campaign,
+            term: term,
         }));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

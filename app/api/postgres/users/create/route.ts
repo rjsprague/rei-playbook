@@ -6,13 +6,13 @@ export async function POST(req: NextRequest) {
         const body = await req.text();
         const data = JSON.parse(body);
 
-        const { name, phone, email, course, utm_source, utm_campaign, utm_term, oneFreeCourse, client_id, ip, device, firstName, lastName } = data;
+        const { name, phone, email, course, source, campaign, term, one_free_course, client_id, ip, device, firstName, lastName } = data;
 
         const courseString = JSON.stringify(course);
         const deviceString = JSON.stringify(device);
 
         await sql`
-            INSERT INTO users (name, firstName, lastName, email, phone, course, utm_source, utm_campaign, utm_term, oneFreeCourse, client_id, ip, device)
+            INSERT INTO users (name, firstName, lastName, email, phone, course, utm_source, utm_campaign, utm_term, one_free_course, client_id, ip, device)
             VALUES (
                 ${name},
                 ${firstName},
@@ -20,10 +20,10 @@ export async function POST(req: NextRequest) {
                 ${email},
                 ${phone},
                 ${courseString},
-                ${utm_source},
-                ${utm_campaign},
-                ${utm_term},
-                ${oneFreeCourse},
+                ${source},
+                ${campaign},
+                ${term},
+                ${one_free_course},
                 ${client_id},
                 ${ip},
                 ${deviceString}

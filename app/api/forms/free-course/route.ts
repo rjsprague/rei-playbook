@@ -13,14 +13,13 @@ interface CustomNextRequest extends NextRequest {
 
 export async function POST(req: CustomNextRequest) {
     const ip = req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for') || req.clientIp;
-
     const ua = new UAParser(req.headers.get('user-agent') || '');
     const deviceInfo = ua.getResult();
 
     const body = await req.text();
     let data = JSON.parse(body);
 
-    if (data.utm_campaign !== 'one-free-course') {
+    if (data.campaign !== 'one-free-course') {
         return NextResponse.json({ status: 400, message: 'Invalid request' });
     }
 
@@ -58,8 +57,8 @@ export async function POST(req: CustomNextRequest) {
         // If the user already exists, set dbURL to update the user
         dbURL = '/api/postgres/users/update';
         data.id = user.rows[0]?.id || null;
-        if (user.rows[0].onefreecourse) {
-            // If the user.oneFreeCourse is true, return a message that the user has received a free course
+        if (user.rows[0].one_free_course) {
+            // If the user.one_free_course is true, return a message that the user has received a free course
             return NextResponse.json({ status: 401, message: 'You have already received a free course' });
         }
     }
@@ -69,6 +68,14 @@ export async function POST(req: CustomNextRequest) {
     data.firstName = firstName;
     data.lastName = lastName;
 
+    // create tags array for BerserkerMail
+    data.tags = [
+        data.course.name,
+        `${data.source}-${data.course.id}-ENROLL`
+    ]
+
+    // set messageType for slack notification
+    data.messageType = 'FreeCourseRequest';
 
     // Define the API endpoints
     const apiEndpoints = [
@@ -122,8 +129,8 @@ export async function POST(req: CustomNextRequest) {
     });
 
     if (allFulfilled) {
-        // If all requests are successful, update the user's oneFreeCourse value to true in the database, and return a success message
-        await sql`UPDATE users SET onefreecourse = true WHERE email = ${data.email};`;
+        // If all requests are successful, update the user's one_free_course value to true in the database, and return a success message
+        await sql`UPDATE users SET one_free_course = true WHERE email = ${data.email};`;
         return NextResponse.json({ status: 'fulfilled', message: 'Data sent successfully' });
     } else {
         return NextResponse.error();

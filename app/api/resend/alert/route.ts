@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const body = await req.text();
     const data = JSON.parse(body);
     const { fromName, fromEmail, toName, toEmail, subject, message, key } = data;
-    const { apiEndpoint, name, email, phone, course, utm_source, utm_campaign, utm_term, oneFreeCourse, client_id, ip, device } = message;
+    const { apiEndpoint, name, email, phone, course, source, campaign, term, one_free_course, client_id, ip, device } = message;
 
     const courseString = JSON.stringify(course);
     const deviceString = JSON.stringify(device);
@@ -46,10 +46,10 @@ export async function POST(req: NextRequest) {
                 email: email,
                 phone: phone,
                 course: courseString,
-                utm_source: utm_source,
-                utm_campaign: utm_campaign,
-                utm_term: utm_term,
-                one_free_course: oneFreeCourse,
+                source: source,
+                campaign: campaign,
+                term: term,
+                one_free_course: one_free_course,
                 client_id: client_id,
                 ip: ip,
                 device: deviceString,
