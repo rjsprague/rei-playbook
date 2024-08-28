@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
 
         const validateHmac = (data: any, hash: string) => {
             const hmac = crypto.createHmac('sha256', thinkificApiKey).update(data).digest('hex');
+            console.log('HMAC:', hmac);
             return hmac === hash;
         };
 
@@ -33,6 +34,8 @@ export async function POST(req: NextRequest) {
         data.lastName = data.payload.user.last_name;
         data.email = data.payload.user.email;
         data.tags = [data.payload.product_name];
+        data.source = 'Thinkific';
+        data.podioWebhook = process.env.PODIO_ORDERS_WEBHOOK as string;
 
         // Define the API endpoints
         const apiEndpoints = [

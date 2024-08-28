@@ -71,11 +71,14 @@ export async function POST(req: CustomNextRequest) {
     // set messageType for slack notification
     data.messageType = 'FreeCourseRequest';
 
+    // load Podio Leads Webhook
+    data.podioWebhook = process.env.PODIO_LEADS_WEBHOOK as string;
+
     // Define the API endpoints
     const apiEndpoints = [
         '/api/berserker-mail',
-        // '/api/podio',
-        // '/api/notification/slack',
+        '/api/podio',
+        '/api/notification/slack',
         dbURL,
     ] as any;
 

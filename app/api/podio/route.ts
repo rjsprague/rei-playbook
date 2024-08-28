@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
     const body = await req.text();
+    const data = JSON.parse(body);
     try {
-        const response = await fetch('https://webhook.reiautomated.io/pwa/peye081wr408618', {
+        const response = await fetch(data.podioWebhook, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
