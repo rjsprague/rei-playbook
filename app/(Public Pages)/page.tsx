@@ -13,7 +13,7 @@ import ffMockup from "@/public/FundingFormulaWebP.webp"
 import acqdisMockup from "@/public/acq-dis-webp.webp"
 import ckmMockup from "@/public/CKMwebP.webp"
 import Link from "next/link";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, use } from "react";
 import { Button, Description, Dialog, DialogPanel, DialogTitle, Listbox, ListboxButton, ListboxOption, ListboxOptions, Input, Field, Label } from '@headlessui/react'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,6 +35,7 @@ export default function Home() {
     const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME;
     const currentYear = new Date().getFullYear();
     const router = useRouter();
+    const [clientId, setClientId] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [formData, setFormData] = useState({
@@ -45,10 +46,32 @@ export default function Home() {
         utm_source: "" as string,
         utm_campaign: "" as string,
         utm_term: "" as string,
-        oneFreeCourse: true as boolean,
+        oneFreeCourse: false as boolean,
+        client_id: "" as string
     });
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    useEffect(() => {
+        // extract the GA4 Client ID from the cookie
+        const extractGA4ClientId = () => {
+            const cookie = document.cookie.split(";").find(c => c.trim().startsWith("_ga"));
+            console.log("Cookie:", cookie);
+            if (!cookie) return "";
+            const clientId = cookie.split(".").slice(-2).join(".");
+            console.log("GA4 Client ID:", clientId);
+            return clientId;
+        }
+        const clientId = extractGA4ClientId();
+        setClientId(clientId);
+        console.log("GA4 Client ID:", clientId);
+        // Add client id to form data
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            client_id: clientId,
+        }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [clientId]);
 
     // Sanitize and validate phone input
     const sanitizePhoneNumber = (phone: string): string => {
@@ -142,11 +165,6 @@ export default function Home() {
             return;
         }
 
-        if (formData.utm_source !== "NTSMHF" && formData.utm_source !== "ntsmhf") {
-            toast.error("You are not authorized to access this page.");
-            return;
-        }
-
         try {
             const response = await fetch("/api/forms/free-course", {
                 method: "POST",
@@ -156,22 +174,36 @@ export default function Home() {
                 body: JSON.stringify(formData),
             });
             console.log(response);
+            const data = await response.json();
+            console.log(data);
 
-            if (response.status === 200) {
+            if (data.status === 200) {
                 toast.success("Form submitted successfully!");
                 setSubmitting(false);
                 setIsOpen(false);
                 router.push("/next-steps");
-            } else if (response.status === 400) {
+            } else if (data.status === 400) {
+                toast.error("You may not be eligible for a free course.");
+                // wait for 3 seconds before redirecting to the REI Playbook page
+                setTimeout(() => {
+                    router.push("/rei-playbook");
+                }, 3000);
+            } 
+            else if (data.status === 401) {
                 toast.error("You already have a free course. Please check your email for access.");
+                setTimeout(() => {
+                    router.push("/rei-playbook");
+                }, 3000);
             }
             else {
                 throw new Error("Failed to submit form. Please try again.");
             }
-            setSubmitting(false);
+            
         } catch (error) {
             toast.error("Failed to submit form. Please try again.");
             console.error("Form submission error:", error);
+        } finally {
+            setSubmitting(false);
         }
 
     }
@@ -722,18 +754,18 @@ export default function Home() {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
                         <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black bg-opacity-50">
-                            <DialogPanel className="items-center max-w-2xl space-y-4 border bg-white p-12 rounded-lg flex flex-col justify-center shadow-super border-t-4 border-t-secondary">
+                            <DialogPanel className="items-center w-full max-w-md sm:w-full sm:max-w-2xl space-y-4 border bg-white p-4 sm:p-12 rounded-lg flex flex-col justify-center shadow-super border-t-4 border-t-secondary">
                                 <DialogTitle className="font-bold text-4xl text-center text-primary">Choose Your Free Course</DialogTitle>
                                 <Description className="font-semibold text-xl">PLEASE READ CAREFULLY TO GET ACCESS:</Description>
                                 <p>After you fill out the form and click &quot;Get My Free Course Now&quot; you will receive an email asking you to confirm your email address. You must click the link in the email in order to get access to the course. Be careful that the email address you entered is correct. If you have any issues you can contact support@reiautomated.io for assistance.</p>
-                                <form className="flex flex-col space-y-4 max-w-100" onSubmit={handleSubmit} >
+                                <form className="flex flex-col space-y-4 max-w-100 w-full" onSubmit={handleSubmit} >
                                     <section className="flex flex-row items-center gap-2 rounded-lg shadow-border-shadow border-blue-800 pl-2">
                                         <label htmlFor="name" className="w-16 font-semibold">Name:</label>
                                         <Input
                                             className="bg-gray-100 rounded-r-lg px-2 py-1 w-full"
                                             type="text"
-                                            placeholder="Enter your name"
-                                            aria-label="Enter your name"
+                                            placeholder="Full name"
+                                            aria-label="Full name"
                                             name="name"
                                             value={formData.name}
                                             onChange={handleInputChange}
@@ -771,7 +803,7 @@ export default function Home() {
                                     <Field className="flex items-center w-full relative space-x-2 shadow-border-shadow rounded-lg pl-2">
                                         <Label className="w-16 font-semibold">Course:</Label>
                                         <Listbox onChange={handleCourseChange}>
-                                            <ListboxButton className="relative z-10 w-full bg-gray-100 rounded-r-lg text-left py-1 pl-2">
+                                            <ListboxButton className="relative z-10 w-full bg-blue-100 rounded-r-lg text-left py-1 pl-2">
                                                 {formData?.course?.name ? formData.course.name : "Select a course"}<FaChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2" />
                                             </ListboxButton>
                                             <ListboxOptions
@@ -788,7 +820,7 @@ export default function Home() {
                                         </Listbox>
                                     </Field>
                                     <Button
-                                        className="bg-secondary text-white text-3xl py-2 px-4 rounded-lg shadow-super"
+                                        className="bg-secondary text-white text-3xl py-2 px-4 rounded-lg shadow-super w-full"
                                         type="submit"
                                     >{submitting ? 'Submitting' : 'Get My Free Course Now'}</Button>
                                 </form>

@@ -17,15 +17,39 @@ export async function POST(req: CustomNextRequest) {
     const ua = new UAParser(req.headers.get('user-agent') || '');
     const deviceInfo = ua.getResult();
 
-    console.log('IP:', ip);
-    console.log('Device:', deviceInfo);
-
     const body = await req.text();
     let data = JSON.parse(body);
 
-    // Check if the user already exists in the database
-    const user = await sql`SELECT * FROM users WHERE email = ${data.email};`;
+    if (data.utm_campaign !== 'one-free-course') {
+        return NextResponse.json({ status: 400, message: 'Invalid request' });
+    }
 
+    data.ip = ip;
+    data.device = deviceInfo;
+
+    console.log('Data:', data);
+
+    let user = null;
+    // Search for the user based on the data.email
+    const userByEmail = await sql`SELECT * FROM users WHERE email = ${data.email};`;
+    // Search for the user based on the data.client_id
+    const userByClientId = await sql`SELECT * FROM users WHERE client_id = ${data.client_id};`;
+    // Search for the user based on the data.phone
+    const userByPhone = await sql`SELECT * FROM users WHERE phone = ${data.phone};`;
+
+    // If userByEmail has a row, set user to userByEmail
+    if (userByEmail.rows.length > 0) {
+        user = userByEmail;
+        console.log('User by email:', user);
+    } else if (userByPhone.rows.length > 0) {
+        // If userByPhone has a row, set user to userByPhone
+        user = userByPhone;
+        console.log('User by phone:', user);
+    } else if (userByClientId.rows.length > 0) {
+        // If userByClientId has a row, set user to userByClientId
+        user = userByClientId;
+        console.log('User by client ID:', user);
+    }
     console.log(user);
 
     let dbURL = '/api/postgres/users/create';
@@ -33,9 +57,10 @@ export async function POST(req: CustomNextRequest) {
     if (user && user.rows.length > 0) {
         // If the user already exists, set dbURL to update the user
         dbURL = '/api/postgres/users/update';
-        if (user.rows[0].oneFreeCourse) {
+        data.id = user.rows[0]?.id || null;
+        if (user.rows[0].onefreecourse) {
             // If the user.oneFreeCourse is true, return a message that the user has received a free course
-            return NextResponse.json({ message: 'You have already received a free course' });
+            return NextResponse.json({ status: 401, message: 'You have already received a free course' });
         }
     }
 
@@ -47,11 +72,11 @@ export async function POST(req: CustomNextRequest) {
 
     // Define the API endpoints
     const apiEndpoints = [
-        // '/api/berserker-mail',
-        // '/api/podio',
-        // '/api/notification/slack',
+        '/api/berserker-mail',
+        '/api/podio',
+        '/api/notification/slack',
         dbURL,
-        // '/api/notification/email'
+        '/api/notification/email'
     ];
 
     const retries = 3;
@@ -92,11 +117,13 @@ export async function POST(req: CustomNextRequest) {
             console.log(`Data sent to ${apiEndpoints[index]} successfully: `, response.value);
         } else {
             console.error(`Failed to send data to ${apiEndpoints[index]}: `, response);
-            alertFailure(body);
+            alertFailure(apiEndpoints[index], response.status, body);
         }
     });
 
     if (allFulfilled) {
+        // If all requests are successful, update the user's oneFreeCourse value to true in the database, and return a success message
+        await sql`UPDATE users SET onefreecourse = true WHERE email = ${data.email};`;
         return NextResponse.json({ status: 'fulfilled', message: 'Data sent successfully' });
     } else {
         return NextResponse.error();

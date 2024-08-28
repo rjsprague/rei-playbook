@@ -2,10 +2,11 @@
 export async function retryFetch(url: string, options: RequestInit, retries: number, delay: number): Promise<Response> {
 
     // console.log(url, options, retries, delay);
+    const baseURL = process.env.NODE_ENV === 'production' ? 'https://playbook.reiautomated.io' : 'http://localhost:3000';
 
     for (let i = 0; i < retries; i++) {
       try {
-        const response = await fetch('http://localhost:3000'+url, options);
+        const response = await fetch(baseURL+url, options);
         console.log(response);
         if (response.ok) {
           return response;
