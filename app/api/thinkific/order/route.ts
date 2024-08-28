@@ -1,34 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import axios from 'axios';
 import crypto from 'crypto';
 import { Fetcher } from '@/app/lib/retryFetch'
-
-// Updated function for posting to webhook with retry and alerting
-async function patchToBerserkerMail(data: any): Promise<boolean> {
-
-    const payload = {
-        "firstName": data.payload.user.first_name,
-        "lastName": data.payload.user.last_name,
-        "email": data.payload.user.email,
-        "tagNames": [data.payload.product_name],
-    }
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${data.bm_api_key}`
-    }
-
-    try {
-        const response = await axios.patch(data.bm_api_url, payload, { headers });
-        if (response.status === 200) {
-            console.log(`Data sent to ${data.bm_api_url} successfully!`);
-            return true;
-        }
-    } catch (error) {
-        console.error(`Failed to send to webhook: `, error);
-    }
-    return false;
-}
 
 // POST request handler
 export async function POST(req: NextRequest) {

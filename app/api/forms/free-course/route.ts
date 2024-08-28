@@ -36,17 +36,13 @@ export async function POST(req: CustomNextRequest) {
     // If userByEmail has a row, set user to userByEmail
     if (userByEmail.rows.length > 0) {
         user = userByEmail;
-        console.log('User by email:', user);
     } else if (userByPhone.rows.length > 0) {
         // If userByPhone has a row, set user to userByPhone
         user = userByPhone;
-        console.log('User by phone:', user);
     } else if (userByClientId.rows.length > 0) {
         // If userByClientId has a row, set user to userByClientId
         user = userByClientId;
-        console.log('User by client ID:', user);
     }
-    console.log(user);
 
     let dbURL = '/api/postgres/users/create';
 
@@ -85,8 +81,6 @@ export async function POST(req: CustomNextRequest) {
 
     // Define the API data
     const allFulfilled = await Fetcher(apiEndpoints, data);
-
-    console.log('All Fulfilled:', allFulfilled);
 
     if (allFulfilled) {
         return NextResponse.json({ status: 200, message: 'Data sent successfully' });

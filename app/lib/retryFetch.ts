@@ -3,14 +3,11 @@ import { alertFailure } from './failureAlert';
 
 
 async function retryFetch(url: string, options: RequestInit, retries: number, delay: number): Promise<Response> {
-
-    console.log(url, options, retries, delay);
     const baseURL = process.env.NODE_ENV === 'production' ? 'https://playbook.reiautomated.io' : 'http://localhost:3000';
 
     for (let i = 0; i < retries; i++) {
         try {
             const response = await fetch(baseURL + url, options);
-            console.log(response);
             if (response.ok) {
                 return response;
             }
@@ -26,8 +23,6 @@ async function retryFetch(url: string, options: RequestInit, retries: number, de
 
 export async function Fetcher(apiEndpoints: [], data: {}): Promise<Boolean> {
 
-    console.log(apiEndpoints, data);
-
     const retries = 3;
     const delay = 2000;
 
@@ -42,11 +37,7 @@ export async function Fetcher(apiEndpoints: [], data: {}): Promise<Boolean> {
                 body: JSON.stringify(data),
             }, retries, delay);
 
-            console.log(response);
-
             const json = await response.json();
-
-            console.log(json);
 
             // Validate the response for success criteria
             if (response.ok) {
@@ -61,13 +52,10 @@ export async function Fetcher(apiEndpoints: [], data: {}): Promise<Boolean> {
         }
     }));
 
-    console.log(responses);
-
     const allFulfilled = responses.every((response) => response.status === 'fulfilled' && response.value.status === 'fulfilled');
 
     // Check and log requests
     responses.forEach((response, index) => {
-        // console.log('Response:', response);
         if (response.status === 'fulfilled' && response.value.status === 'fulfilled') {
             console.log(`Data sent to ${apiEndpoints[index]} successfully: `, response.value);
         } else {

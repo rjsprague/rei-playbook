@@ -3,10 +3,6 @@ import axios from 'axios';
 export async function alertFailure(apiEndpoint: string, status: string, failedData: any) {
     const baseURL = process.env.NODE_ENV === 'production' ? 'https://playbook.reiautomated.io' : 'http://localhost:3000';
 
-    console.log(apiEndpoint);
-    console.log(status);
-    console.log(failedData);
-
     // Parse the incoming failedData
     const parsedData = failedData;
 

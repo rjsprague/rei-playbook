@@ -13,7 +13,7 @@ import ffMockup from "@/public/FundingFormulaWebP.webp"
 import acqdisMockup from "@/public/acq-dis-webp.webp"
 import ckmMockup from "@/public/CKMwebP.webp"
 import Link from "next/link";
-import { useEffect, useState, Suspense, use } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Button, Description, Dialog, DialogPanel, DialogTitle, Listbox, ListboxButton, ListboxOption, ListboxOptions, Input, Field, Label } from '@headlessui/react'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -53,19 +53,14 @@ export default function Home() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     useEffect(() => {
-        // extract the GA4 Client ID from the cookie
         const extractGA4ClientId = () => {
             const cookie = document.cookie.split(";").find(c => c.trim().startsWith("_ga"));
-            console.log("Cookie:", cookie);
             if (!cookie) return "";
             const clientId = cookie.split(".").slice(-2).join(".");
-            console.log("GA4 Client ID:", clientId);
             return clientId;
         }
         const clientId = extractGA4ClientId();
         setClientId(clientId);
-        console.log("GA4 Client ID:", clientId);
-        // Add client id to form data
         setFormData(prevFormData => ({
             ...prevFormData,
             client_id: clientId,
@@ -83,8 +78,6 @@ export default function Home() {
         const source = urlParams.get("source") || "";
         const campaign = urlParams.get("campaign") || "";
         const term = urlParams.get("utm_term") || "";
-
-        console.log(campaign)
 
         // if (source !== "ntsmhf" && source !== "NTSMHF") {
         //     // disable mouse buttons and links
@@ -152,8 +145,6 @@ export default function Home() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
-        console.log("Submitting form...");
         setSubmitting(true);
 
         // Validate email and phone
@@ -175,9 +166,7 @@ export default function Home() {
                 },
                 body: JSON.stringify(formData),
             });
-            console.log(response);
             const data = await response.json();
-            console.log(data);
 
             if (data.status === 200) {
                 toast.success("Form submitted successfully!");

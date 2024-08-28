@@ -80,12 +80,12 @@ export async function POST(req: NextRequest) {
             const updatedUser = await sql.query(query, values);
 
             console.log("Updated user: ", updatedUser.rows[0]);
-            return NextResponse.json({ user: updatedUser.rows[0] }, { status: 200 });
+            return NextResponse.json({ status: "fulfilled", message: "User successfully updated.", user: updatedUser.rows[0] });
         } else {
-            return NextResponse.json({ error: "No valid fields provided for update" }, { status: 400 });
+            return NextResponse.json({ status: 400, error: "No valid fields provided for update" });
         }
     } catch (error) {
         console.error("Error updating data: ", error);
-        return NextResponse.json({ error: "Failed to update user data" }, { status: 500 });
+        return NextResponse.json({ status: 500, error: "Failed to update user data" });
     }
 }
