@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCurrentTimestamp } from "@/app/lib/currentTimestamp";
 
 export async function POST(req: NextRequest) {
     const authHeader = req.headers.get('Authorization');
@@ -9,14 +8,9 @@ export async function POST(req: NextRequest) {
         throw new Error('Unauthorized');
     }
 
-    const timestamp = getCurrentTimestamp();
-    console.log('Timestamp:', timestamp);
     const body = await req.text();
     const data = JSON.parse(body);
-    console.log('Enroll Data:', data);
     const { firstName, lastName, email, course_id } = data;
-
-    console.log(firstName, lastName, email, course_id);
 
     const thinkificSubdomain = process.env.THINKIFIC_SUBDOMAIN;
     const thinkificBaseUrl = process.env.THINKIFIC_BASE_URL;
@@ -26,8 +20,6 @@ export async function POST(req: NextRequest) {
     if (!email) {
         return NextResponse.error();
     }
-
-    console.log('Enroll Data:', data);
 
     try {
 

@@ -8,10 +8,8 @@ export async function POST(req: NextRequest) {
         const body = await req.text();
         const data = JSON.parse(body);
 
-        console.log(data);
-
         // Validate the request
-        if (!data.bm_api_key || data.bm_api_key === '' || data.bm_api_key !== process.env.BM_API_KEY) {
+        if (data.bm_api_key !== process.env.BM_API_KEY) {
             console.error('Unauthorized request');
             return NextResponse.error();
         }
@@ -32,10 +30,7 @@ export async function POST(req: NextRequest) {
             'Authorization': `Bearer ${data.bm_api_key}`
         }
 
-        console.log(data.bm_api_url)
-
         const response = await axios.patch(data.bm_api_url, payload, { headers });
-        console.log(response);
 
         if (response.status === 200) {
             // console.log(`Data sent to ${bm_api_url} successfully!`);
