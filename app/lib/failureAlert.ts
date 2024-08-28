@@ -8,7 +8,7 @@ export async function alertFailure(apiEndpoint: string, status: string, failedDa
     console.log(failedData);
 
     // Parse the incoming failedData
-    const parsedData = JSON.parse(failedData);
+    const parsedData = failedData;
 
     // create a message object with the parsed data
     const message = {

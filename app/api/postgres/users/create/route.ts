@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         const deviceString = JSON.stringify(device);
 
         await sql`
-            INSERT INTO users (name, firstName, lastName, email, phone, course, utm_source, utm_campaign, utm_term, one_free_course, client_id, ip, device)
+            INSERT INTO users (name, firstName, lastName, email, phone, course, source, campaign, utm_term, one_free_course, client_id, ip, device)
             VALUES (
                 ${name},
                 ${firstName},
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         `;
 
         const user = await sql`SELECT * FROM users WHERE email = ${email};`;
-        return NextResponse.json({ user }, { status: 200 });
+        return NextResponse.json({status: 'fulfilled', message: 'User data inserted successfully', user: user.rows[0]});
     } catch (error) {
         console.error("Error inserting data: ", error);
         return NextResponse.json({ error: "Failed to insert user data" }, { status: 500 });

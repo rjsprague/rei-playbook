@@ -84,6 +84,8 @@ export default function Home() {
         const campaign = urlParams.get("campaign") || "";
         const term = urlParams.get("utm_term") || "";
 
+        console.log(campaign)
+
         // if (source !== "ntsmhf" && source !== "NTSMHF") {
         //     // disable mouse buttons and links
         //     document.oncontextmenu = function (e) {

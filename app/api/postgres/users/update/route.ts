@@ -39,11 +39,11 @@ export async function POST(req: NextRequest) {
             values.push(JSON.stringify(course));
         }
         if (source) {
-            updates.push('utm_source = $' + (values.length + 1));
+            updates.push('source = $' + (values.length + 1));
             values.push(source);
         }
         if (campaign) {
-            updates.push('utm_campaign = $' + (values.length + 1));
+            updates.push('campaign = $' + (values.length + 1));
             values.push(campaign);
         }
         if (term) {
