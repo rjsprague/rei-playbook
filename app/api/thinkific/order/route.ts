@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
             console.error('Unauthorized request');
             return NextResponse.error();
         }
-
         const data = JSON.parse(body) as any;
 
         data.bm_api_key = process.env.BM_API_KEY as string;

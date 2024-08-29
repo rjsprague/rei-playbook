@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
                             type: 'section',
                             text: {
                                 type: 'mrkdwn',
-                                text: `*Customer:* ${data.payload.billing_name}\n*Email:* ${data.payload.user.email}\n*Product:* ${data.payload.product_name}\n*Order Number:* ${data.payload.order_number}\n*Amount:* $${data.payload.items[0].amount_dollars}`
+                                text: `*Customer:* ${data.payload.billing_name}\n*Email:* ${data.payload.user.email}\n*Product:* ${data.payload.product_name}\n*Order Number:* ${data.payload.order_number}\n*Amount:* $${data.payload.amount_dollars}`
                             }
                         }
                     ]

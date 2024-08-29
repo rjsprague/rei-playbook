@@ -19,6 +19,7 @@ export async function POST(req: CustomNextRequest) {
     let data = JSON.parse(body);
 
     if (data.campaign !== 'one-free-course') {
+        console.log('Invalid Campaign:', data.campaign);
         return NextResponse.json({ status: 400, message: 'Invalid request' });
     }
 
