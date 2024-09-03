@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
     try {
+        const slackNewLeadsWebhook = process.env.SLACK_NEW_LEADS_URL;
+        if(!slackNewLeadsWebhook) {
+            return NextResponse.json({ error: 'Slack Webhook URL not found' }, { status: 500 });
+        }
+        
         const body = await req.text();
         const data = JSON.parse(body);
 
@@ -62,7 +67,7 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json({ error: 'Invalid message type' }, { status: 400 });
         }
 
-        const response = await fetch("https://hooks.slack.com/services/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", {
+        const response = await fetch(slackNewLeadsWebhook, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
